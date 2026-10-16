@@ -1,0 +1,63 @@
+:root {
+  /* Brand */
+  --token-color-primary: #137fec;
+  --token-color-primary-hover: #0f6ecf;
+  --token-color-primary-soft: #ddefff;
+
+  /* Neutral surfaces */
+  --token-color-bg: #ffffff;
+  --token-color-bg-muted: #f8fafc;
+  --token-color-surface: #f1f5f9;
+  --token-color-surface-strong: #e2e8f0;
+  --token-color-overlay: rgba(15, 23, 42, 0.55);
+
+  /* Borders */
+  --token-color-border: #c8cde0;
+  --token-color-border-strong: #94a3b8;
+
+  /* Typography */
+  --token-color-text: #1a1d42;
+  --token-color-text-secondary: #ffffff;
+  --token-color-text-muted: #64748b;
+  --token-color-text-disabled: #9ca3af;
+  --token-color-text-placeholder: #a8afcd;
+
+  /* Status */
+  --token-color-error: #ff4646;
+  --token-color-error-bg: #fff5f5;
+  --token-color-success: #059669;
+  --token-color-success-bg: #ecfdf5;
+  --token-color-warning: #d4af37;
+  --token-color-warning-bg: #fff7db;
+  --token-color-info: #137fec;
+  --token-color-info-bg: #ddefff;
+
+  /* Motion */
+  --token-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --token-duration-fast: 120ms;
+  --token-duration-normal: 220ms;
+
+  /* Legacy aliases for existing code */
+  --color-primary: var(--token-color-primary);
+  --color-primary-hover: var(--token-color-primary-hover);
+  --color-bg: var(--token-color-bg);
+  --color-bg-disable: var(--token-color-bg-muted);
+  --color-surface: var(--token-color-surface);
+  --color-border: var(--token-color-border);
+  --color-text: var(--token-color-text);
+  --color-text-secondary: var(--token-color-text-secondary);
+  --color-text-disabled: var(--token-color-text-disabled);
+  --color-text-placeholder: var(--token-color-text-placeholder);
+  --color-error: var(--token-color-error);
+  --color-error-bg: var(--token-color-error-bg);
+  --color-error-text: var(--token-color-error);
+  --color-success: var(--token-color-success);
+  --color-success-bg: var(--token-color-success-bg);
+  --color-success-text: var(--token-color-success);
+  --color-warning: var(--token-color-warning);
+  --color-warning-bg: var(--token-color-warning-bg);
+  --color-warning-text: #eab308;
+  --color-info: var(--token-color-info);
+  --color-info-bg: var(--token-color-info-bg);
+  --color-info-text: var(--token-color-info);
+}
