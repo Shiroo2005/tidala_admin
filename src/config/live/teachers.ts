@@ -2,6 +2,7 @@ import { paginate } from "@/demo/store";
 import type { components } from "@/generated/api";
 import { realRequest } from "../realApi";
 import { cached, DEMO, fetchAll, media, notFound, pageParams, unsupported, type Route } from "./shared";
+import { findStudent, sanctionStudent } from "./students";
 
 type Summary = components["schemas"]["TeacherProfileSummary"];
 type Profile = components["schemas"]["PublicTeacherProfileResponse"];
@@ -158,11 +159,15 @@ export const teacherRoutes: Route[] = [
     handle: async ({ id }) => uiTeacherDetail(await getProfile(id!)),
   },
   {
-    // Students are still demo records, so their sanctions stay local; real teachers cannot be sanctioned yet.
+    // Teachers have no admin sanction endpoint yet, so theirs are refused. Students are
+    // real accounts: their sanctions go to the admin ban/unban endpoints (see students.ts).
+    // Anything else (demo records) falls through to the demo adapter.
     pattern: /^\/v1\/admin\/accounts\/([^/]+)\/(?:sanction|unsanction)$/,
-    handle: async ({ id }) => {
+    handle: async ({ id, params, body }) => {
       const teachers = await allTeachers().catch(() => []);
-      return teachers.some((teacher) => teacher.userId === id) ? unsupported("cảnh báo hoặc khóa tài khoản") : DEMO;
+      if (teachers.some((teacher) => teacher.userId === id)) return unsupported("cảnh báo hoặc khóa tài khoản");
+      const student = await findStudent(id!).catch(() => undefined);
+      return student ? sanctionStudent(id!, { params, body }) : DEMO;
     },
   },
   {

@@ -15,7 +15,7 @@ Open **http://localhost:3000**. Sign in with a backend admin account.
 
 Sign in with a real **ADMIN** account from the backend (`VITE_API_BASE_URL`, default `https://dev-v2-api.tidala.vn`). Non-admin accounts are rejected. Copy `.env.example` to `.env.local` to change the backend or `VITE_PUBLIC_SITE_URL`.
 
-**Live vs demo.** Login, session refresh, logout, tags, training levels, provinces/districts, posts, reports and teachers (read-only) call the real backend. Actions without a backend endpoint (post pinning, teacher invite/edit/sanctions, warn/hide/ban from a report) fail with an explicit "Backend chưa hỗ trợ" message. Students, uploads and settings still run on local demo data. See [API_COVERAGE.md](API_COVERAGE.md).
+**Live vs demo.** Login, session refresh, logout, tags, training levels, provinces/districts, posts, reports, teachers (read-only) and students call the real backend. Actions without a backend endpoint (post pinning, teacher invite/edit/sanctions, warn/hide/ban from a report) fail with an explicit "Backend chưa hỗ trợ" message. Uploads and settings still run on local demo data. See [API_COVERAGE.md](API_COVERAGE.md).
 
 Smoke-test the live calls (read-only): `node --env-file-if-exists=.env.local scripts/live-check.mjs`. Set `TIDALA_ADMIN_EMAIL` and `TIDALA_ADMIN_PASSWORD` in `.env.local` to include the signed-in checks.
 
@@ -62,7 +62,7 @@ npm run test:e2e
 
 To use an installed Chrome instead, set `CHROME_PATH=/path/to/chrome`. Set `ADMIN_URL` to test another local origin. Screenshots and results are written to `artifacts/`.
 
-The OpenAPI reference is `references/openapi.json`, copied from `api-1 (5).json`. Run `npm run generate:api` after replacing that reference. See [API_COVERAGE.md](API_COVERAGE.md) for the differences between the existing admin UI and this contract, and [VERIFICATION.md](VERIFICATION.md) for checked behavior and visual comparison details.
+The OpenAPI reference is `references/openapi.json`, copied from `api-1 (6).json`. Run `npm run generate:api` after replacing that reference. See [API_COVERAGE.md](API_COVERAGE.md) for the differences between the existing admin UI and this contract, and [VERIFICATION.md](VERIFICATION.md) for checked behavior and visual comparison details.
 
 ## Build and deployment
 

@@ -33,7 +33,7 @@ const created = (i: number) => new Date(Date.parse(FIXED_NOW) - i * 86400000).to
 export function seedDatabase(): DemoDatabase {
     const provinces: ContractProvince[] = ['TP. Hồ Chí Minh', 'Hà Nội', 'Đà Nẵng'].map((name, i) => ({ id: uuid(1, i + 1), name, slug: ['ho-chi-minh', 'ha-noi', 'da-nang'][i] }));
     const districts: ContractDistrict[] = ['Quận 1', 'Bình Thạnh', 'Cầu Giấy', 'Thanh Xuân', 'Hải Châu', 'Thanh Khê'].map((name, i) => ({ id: uuid(2, i + 1), name, slug: ['quan-1', 'binh-thanh', 'cau-giay', 'thanh-xuan', 'hai-chau', 'thanh-khe'][i], provinceId: provinces[Math.floor(i / 2)].id }));
-    const levels: ContractTrainingLevel[] = ['B1', 'B2', 'C'].map((name, i) => ({ id: uuid(3, i + 1), name, slug: name.toLowerCase(), description: ['Xe ô tô số tự động', 'Xe ô tô số sàn', 'Xe tải'][i], orderPosition: i }));
+    const levels: ContractTrainingLevel[] = ['B1', 'B2', 'C'].map((name, i) => ({ id: uuid(3, i + 1), name, slug: name.toLowerCase(), description: ['Xe ô tô số tự động', 'Xe ô tô số sàn', 'Xe tải'][i], orderPosition: i, progressTemplate: { templateVersion: 1, enforcement: 'WARN', stages: [] } }));
     const tags: ContractTag[] = ['Dạy tận tâm', 'Kiên nhẫn', 'Luyện sa hình', 'Lái xe đường trường'].map((name, i) => ({ id: uuid(4, i + 1), name, slug: `the-${i + 1}`, type: i < 2 ? 'STYLE' : 'SPECIALTY' }));
     const centers: DrivingCenter[] = [{ id: uuid(5, 1), name: 'Sân tập lái Bình Thạnh', address: '123 Điện Biên Phủ, Bình Thạnh, TP. Hồ Chí Minh', type: 'PRACTICE_GROUND', placeId: uuid(5, 1) }, { id: uuid(5, 2), name: 'Trung tâm sát hạch Củ Chi', address: 'Củ Chi, TP. Hồ Chí Minh', type: 'TEST_CENTER', placeId: uuid(5, 2) }];
     const teachers: DemoTeacher[] = Array.from({ length: 32 }, (_, i) => {

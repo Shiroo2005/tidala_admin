@@ -13,7 +13,7 @@ test('metadata fixtures conform to the supplied API schemas',()=>{
   const properties=spec.components.schemas[schema].properties;
   for(const row of seedDatabase()[collection])for(const [key,value] of Object.entries(row)){
    assert.ok(properties[key],`${schema}.${key} exists`);
-   assert.equal(typeof value,properties[key].type==='integer'?'number':properties[key].type);
+   if(properties[key].type)assert.equal(typeof value,properties[key].type==='integer'?'number':properties[key].type);
    if(properties[key].enum)assert.ok(properties[key].enum.includes(value));
    if(properties[key].format==='uuid')assert.match(value,/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/);
   }

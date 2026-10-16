@@ -5,7 +5,11 @@ import { realRequest } from "./realApi";
 import { postRoutes } from "./live/posts";
 import { reportRoutes } from "./live/reports";
 import { DEMO, fetchAll, pageParams, type Params, type Route } from "./live/shared";
+import { studentRoutes } from "./live/students";
 import { teacherRoutes } from "./live/teachers";
+import type { components } from "@/generated/api";
+
+type AdminUser = components["schemas"]["AdminUserResponse"];
 
 // Routes with a counterpart in the reference API go to the real backend and are
 // translated to/from the older shapes the screens expect. Everything else stays on the demo adapter.
@@ -39,6 +43,7 @@ const count = <T>(rows: T[], test: (row: T) => boolean) => rows.filter(test).len
 const routes: Route[] = [
   ...postRoutes,
   ...reportRoutes,
+  ...studentRoutes,
   ...teacherRoutes,
 
   {
@@ -48,9 +53,18 @@ const routes: Route[] = [
 
   // Dashboard figures are derived from list endpoints; the reference API has no statistics endpoints.
   {
-    // No user-listing endpoint exists, so these cannot be computed. Zeros, not demo numbers.
+    // Counted from the admin user list (added by api-1 (6).json). A timed ban keeps the
+    // stored status, so banned users are counted from the `banned` flag, not the status.
     pattern: /^\/admin\/stats\/users$/,
-    handle: async () => ({ total: 0, active: 0, inactive: 0, banned: 0 }),
+    handle: async () => {
+      const users = await fetchAll<AdminUser>("/api/v1/admin/users");
+      return {
+        total: users.length,
+        active: count(users, (u) => !u.banned && u.status === "ACTIVE"),
+        inactive: count(users, (u) => !u.banned && u.status !== "ACTIVE"),
+        banned: count(users, (u) => Boolean(u.banned)),
+      };
+    },
   },
   {
     // Only published profiles are listed publicly: drafts are unknown and the period cannot be applied.
