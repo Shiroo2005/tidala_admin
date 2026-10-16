@@ -218,6 +218,148 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/notebook/students/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 03. Get Student */
+        get: operations["getStudent"];
+        /** 04. Update Student */
+        put: operations["updateStudent"];
+        post?: never;
+        /** 06. Delete Student */
+        delete: operations["deleteStudent"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/students/{id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 05. Change Student Status */
+        put: operations["changeStatus_1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/students/{id}/progress/{stageCode}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 07. Mark Stage */
+        put: operations["markStage"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/students/{id}/progress/{stageCode}/items/{itemCode}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 16. Mark Stage Item */
+        put: operations["markStageItem"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/sessions/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 10. Update Session */
+        put: operations["updateSession"];
+        post?: never;
+        /** 11. Delete Session */
+        delete: operations["deleteSession"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/payments/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 14. Update Payment */
+        put: operations["updatePayment"];
+        post?: never;
+        /** 15. Delete Payment */
+        delete: operations["deletePayment"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/courses/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 19. Get Course */
+        get: operations["getCourse"];
+        /** 20. Update Course */
+        put: operations["updateCourse"];
+        post?: never;
+        /** 21. Delete Course */
+        delete: operations["deleteCourse"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/courses/{id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 23. Change Course Status */
+        put: operations["changeCourseStatus"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/me/push-tokens": {
         parameters: {
             query?: never;
@@ -226,11 +368,134 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        /** 03. Register Push Token */
+        /** 04. Register Push Token */
         put: operations["registerPushToken"];
         post?: never;
-        /** 04. Unregister Push Token */
+        /** 05. Unregister Push Token */
         delete: operations["unregisterPushToken"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notifications/read": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 03. Mark All Read */
+        put: operations["markAllRead"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notebooks/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 03. Get Notebook */
+        get: operations["get"];
+        /** 04. Update Notebook */
+        put: operations["update_4"];
+        post?: never;
+        /** 06. Delete Notebook */
+        delete: operations["delete_5"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notebooks/{id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 05. Change Notebook Status */
+        put: operations["changeStatus_2"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notebooks/{id}/progress/{stageCode}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 07. Mark Stage */
+        put: operations["markStage_1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notebooks/{id}/progress/{stageCode}/items/{itemCode}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 08. Mark Stage Item */
+        put: operations["markItem"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notebooks/sessions/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 11. Update Session */
+        put: operations["updateSession_1"];
+        post?: never;
+        /** 12. Delete Session */
+        delete: operations["deleteSession_1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notebooks/payments/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 15. Update Payment */
+        put: operations["updatePayment_1"];
+        post?: never;
+        /** 16. Delete Payment */
+        delete: operations["deletePayment_1"];
         options?: never;
         head?: never;
         patch?: never;
@@ -245,10 +510,10 @@ export interface paths {
         };
         get?: never;
         /** 04. Update by Id */
-        put: operations["update_4"];
+        put: operations["update_5"];
         post?: never;
         /** 05. Delete by Id */
-        delete: operations["delete_5"];
+        delete: operations["delete_6"];
         options?: never;
         head?: never;
         patch?: never;
@@ -263,10 +528,10 @@ export interface paths {
         };
         get?: never;
         /** 04. Update Own by Id */
-        put: operations["update_5"];
+        put: operations["update_6"];
         post?: never;
         /** 05. Delete Own by Id */
-        delete: operations["delete_6"];
+        delete: operations["delete_7"];
         options?: never;
         head?: never;
         patch?: never;
@@ -321,6 +586,24 @@ export interface paths {
         put: operations["moderate"];
         post?: never;
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/posts/{id}/pin": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** 05. Pin by Id */
+        put: operations["pin"];
+        post?: never;
+        /** 06. Unpin by Id */
+        delete: operations["unpin"];
         options?: never;
         head?: never;
         patch?: never;
@@ -543,6 +826,132 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/notebook/students/{id}/sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 08. List Sessions */
+        get: operations["listSessions"];
+        put?: never;
+        /** 09. Create Session */
+        post: operations["createSession"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/students/{id}/payments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 12. List Payments */
+        get: operations["listPayments"];
+        put?: never;
+        /** 13. Create Payment */
+        post: operations["createPayment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/courses": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 17. List Courses */
+        get: operations["listCourses"];
+        put?: never;
+        /** 18. Create Course */
+        post: operations["createCourse"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/courses/{courseId}/students": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 24. List Course Students */
+        get: operations["listCourseStudents"];
+        put?: never;
+        /** 22. Create Student In Course */
+        post: operations["createStudent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notebooks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 01. List My Notebooks */
+        get: operations["list_7"];
+        put?: never;
+        /** 02. Create Notebook */
+        post: operations["create_6"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notebooks/{id}/sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 09. List Sessions */
+        get: operations["listSessions_1"];
+        put?: never;
+        /** 10. Create Session */
+        post: operations["createSession_1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/notebooks/{id}/payments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 13. List Payments */
+        get: operations["listPayments_1"];
+        put?: never;
+        /** 14. Create Payment */
+        post: operations["createPayment_1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/image-uploads": {
         parameters: {
             query?: never;
@@ -568,10 +977,10 @@ export interface paths {
             cookie?: never;
         };
         /** 01. Get All */
-        get: operations["list_7"];
+        get: operations["list_8"];
         put?: never;
         /** 03. Create */
-        post: operations["create_6"];
+        post: operations["create_7"];
         delete?: never;
         options?: never;
         head?: never;
@@ -799,6 +1208,80 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/users/{id}/unban": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * 03. Unban User
+         * @description Lift a ban early, with a reason
+         */
+        post: operations["unbanUser"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/users/{id}/ban": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * 02. Ban User
+         * @description Ban for 1–365 days with a reason
+         */
+        post: operations["banUser"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/posts/{id}/delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 04. Delete by Id */
+        post: operations["delete_8"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/comments/{id}/delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 01. Delete by Id */
+        post: operations["delete_9"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/teacher-profiles/me/draft": {
         parameters: {
             query?: never;
@@ -841,7 +1324,7 @@ export interface paths {
             cookie?: never;
         };
         /** 01. Get All */
-        get: operations["list_8"];
+        get: operations["list_9"];
         put?: never;
         post?: never;
         delete?: never;
@@ -892,7 +1375,7 @@ export interface paths {
             cookie?: never;
         };
         /** 01. Get Own Contact Records */
-        get: operations["list_9"];
+        get: operations["list_10"];
         put?: never;
         post?: never;
         delete?: never;
@@ -909,7 +1392,7 @@ export interface paths {
             cookie?: never;
         };
         /** 01. Get Own Saved Teachers */
-        get: operations["list_10"];
+        get: operations["list_11"];
         put?: never;
         post?: never;
         delete?: never;
@@ -926,7 +1409,7 @@ export interface paths {
             cookie?: never;
         };
         /** 02. Get by Id */
-        get: operations["get"];
+        get: operations["get_1"];
         put?: never;
         post?: never;
         delete?: never;
@@ -989,6 +1472,43 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/posts/pinned": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 02. Get Pinned
+         * @description Always most-recently-pinned first; no sort accepted. Reads an optional bearer token to populate likedByMe.
+         */
+        get: operations["pinned"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/notebook/students": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 01. List Students */
+        get: operations["listStudents"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/me/saved-posts": {
         parameters: {
             query?: never;
@@ -1020,7 +1540,7 @@ export interface paths {
          * 01. Get All Own
          * @description Sortable by: createdAt, publishedAt, title, status
          */
-        get: operations["list_11"];
+        get: operations["list_12"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1055,9 +1575,9 @@ export interface paths {
         };
         /**
          * 01. Get Own
-         * @description Most recent first; sort is not accepted
+         * @description Most recent first; sort is not accepted. `unread=true` returns only unread
          */
-        get: operations["list_12"];
+        get: operations["list_13"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1140,6 +1660,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 01. List Users
+         * @description Newest first; sort is not accepted
+         */
+        get: operations["listUsers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/posts": {
         parameters: {
             query?: never;
@@ -1151,7 +1691,7 @@ export interface paths {
          * 01. Get All
          * @description Sortable by: createdAt, publishedAt, title, status
          */
-        get: operations["list_13"];
+        get: operations["list_14"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1171,8 +1711,64 @@ export interface paths {
         get: operations["detail_2"];
         put?: never;
         post?: never;
-        /** 04. Delete by Id */
-        delete: operations["delete_7"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/notebook/students": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 01. List Students
+         * @description Newest first; sort is not accepted
+         */
+        get: operations["listStudents_1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/audit-logs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 01. Get All
+         * @description Newest first; sort is not accepted
+         */
+        get: operations["list_15"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/audit-logs/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 02. Get by Id */
+        get: operations["detail_3"];
+        put?: never;
+        post?: never;
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -1195,27 +1791,21 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/admin/comments/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /** 01. Delete by Id */
-        delete: operations["delete_8"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        ItemDefinition: {
+            code?: string;
+            label?: string;
+        };
+        ProgressTemplate: {
+            /** Format: int32 */
+            templateVersion?: number;
+            /** @enum {string} */
+            enforcement?: "WARN" | "BLOCK";
+            stages?: components["schemas"]["StageDefinition"][];
+        };
         SaveTrainingLevelCommand: {
             /**
              * @description Display name of the training level
@@ -1233,6 +1823,25 @@ export interface components {
              * @example 1
              */
             orderPosition?: number;
+            /** @description Optional stage checklist for notebook students; omit to use the built-in default */
+            progressTemplate?: components["schemas"]["ProgressTemplate"];
+        };
+        StageDefinition: {
+            code?: string;
+            label?: string;
+            /** @enum {string} */
+            kind?: "MILESTONE" | "TRAINING";
+            requires?: string[];
+            sessionFields?: {
+                [key: string]: "REQUIRED" | "OPTIONAL";
+            };
+            items?: components["schemas"]["ItemDefinition"][];
+            targets?: components["schemas"]["Targets"];
+        };
+        Targets: {
+            /** Format: int32 */
+            durationMinutes?: number;
+            distanceKm?: number;
         };
         ApiErrorResponse: {
             error_code?: string;
@@ -1283,6 +1892,8 @@ export interface components {
              * @example 1
              */
             orderPosition?: number;
+            /** @description Admin override of the stage checklist; null means the default applies */
+            progressTemplate?: components["schemas"]["ProgressTemplate"];
         };
         DrivingCenterSelection: {
             /**
@@ -1726,6 +2337,8 @@ export interface components {
             id?: string;
             /** Format: uuid */
             reporterId?: string;
+            /** @example reporter@example.com */
+            reporterEmail?: string;
             /** @enum {string} */
             targetType?: "TEACHER" | "REVIEW";
             /** Format: uuid */
@@ -1828,6 +2441,8 @@ export interface components {
             /** Format: date-time */
             publishedAt?: string;
             /** Format: date-time */
+            pinnedAt?: string;
+            /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
             updatedAt?: string;
@@ -1843,6 +2458,306 @@ export interface components {
         ChangeOwnPostStatusCommand: {
             /** @enum {string} */
             status: "DRAFT" | "PUBLISHED";
+        };
+        SaveNotebookStudentCommand: {
+            /** @example Nguyễn Văn An */
+            fullName: string;
+            /**
+             * @description Digits only; optional
+             * @example 0912345678
+             */
+            phoneNumber?: string;
+            /**
+             * Format: uuid
+             * @description Course to move the student to; only read on PUT (omit to keep the current course), on create the course comes from the path
+             * @example 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19
+             */
+            courseId?: string;
+            /**
+             * Format: int64
+             * @description Total course fee in VND; defaults to 0
+             * @example 12000000
+             */
+            totalFee?: number;
+            /** @example Học buổi tối */
+            note?: string;
+            /**
+             * @description Already-hosted avatar URL; null, blank or omitted clears it on PUT
+             * @example https://images.tidala.vn/avatars/student.jpg
+             */
+            avatarUrl?: string;
+        };
+        ApiResponseNotebookStudentResponse: {
+            message?: string;
+            data?: components["schemas"]["NotebookStudentResponse"];
+            path?: string;
+        };
+        Course: {
+            /** Format: uuid */
+            id?: string;
+            /** @example Khóa B tháng 9 */
+            name?: string;
+            /** @enum {string} */
+            status?: "NOT_STARTED" | "ACTIVE" | "ENDED";
+        };
+        Item: {
+            code?: string;
+            label?: string;
+            done?: boolean;
+            /** Format: date */
+            doneAt?: string;
+        };
+        NotebookStudentResponse: {
+            /** Format: uuid */
+            id?: string;
+            fullName?: string;
+            phoneNumber?: string;
+            /**
+             * @description Avatar URL; null when absent
+             * @example https://images.tidala.vn/avatars/student.jpg
+             */
+            avatarUrl?: string;
+            /** Format: uuid */
+            teacherUserId?: string;
+            course?: components["schemas"]["Course"];
+            /** Format: uuid */
+            trainingLevelId?: string;
+            /** @enum {string} */
+            status?: "PREPARING" | "STUDYING" | "WAITING_EXAM" | "PASSED" | "DROPPED";
+            /** Format: int64 */
+            totalFee?: number;
+            /** Format: int64 */
+            paidAmount?: number;
+            /** Format: int64 */
+            owedAmount?: number;
+            overpaid?: boolean;
+            /** Format: int64 */
+            totalMinutes?: number;
+            /** @example 35.5 */
+            totalKm?: number;
+            nextSessionStageCode?: string;
+            /**
+             * @example {
+             *       "templateVersion": 1,
+             *       "enforcement": "WARN",
+             *       "stages": [
+             *         {
+             *           "code": "OPENING",
+             *           "label": "Khai giảng",
+             *           "kind": "MILESTONE",
+             *           "requires": [],
+             *           "sessionFields": {},
+             *           "status": "DONE",
+             *           "done": true,
+             *           "doneAt": "2026-09-01",
+             *           "note": null
+             *         },
+             *         {
+             *           "code": "THEORY",
+             *           "label": "Lý thuyết",
+             *           "kind": "TRAINING",
+             *           "requires": [
+             *             "OPENING"
+             *           ],
+             *           "sessionFields": {
+             *             "duration": "REQUIRED"
+             *           },
+             *           "status": "IN_PROGRESS",
+             *           "done": false,
+             *           "doneAt": null,
+             *           "note": null
+             *         }
+             *       ]
+             *     }
+             */
+            progress?: components["schemas"]["StudentProgress"];
+            stageTotals?: components["schemas"]["StageTotals"][];
+            note?: string;
+            /** Format: int32 */
+            version?: number;
+            /** Format: date-time */
+            createdAt?: string;
+        };
+        Stage: {
+            code?: string;
+            label?: string;
+            /** @enum {string} */
+            kind?: "MILESTONE" | "TRAINING";
+            requires?: string[];
+            sessionFields?: {
+                [key: string]: "REQUIRED" | "OPTIONAL";
+            };
+            items?: components["schemas"]["Item"][];
+            targets?: components["schemas"]["Targets"];
+            /** @enum {string} */
+            status?: "NOT_STARTED" | "IN_PROGRESS" | "DONE";
+            done?: boolean;
+            /** Format: date */
+            doneAt?: string;
+            note?: string;
+        };
+        StageTotals: {
+            /** @example ROAD */
+            stageCode?: string;
+            /**
+             * Format: int64
+             * @example 480
+             */
+            minutes?: number;
+            /** @example 350.5 */
+            km?: number;
+            /**
+             * Format: int32
+             * @example 1200
+             */
+            targetMinutes?: number;
+            /** @example 810 */
+            targetKm?: number;
+            reachedTarget?: boolean;
+        };
+        StudentProgress: {
+            /** Format: int32 */
+            templateVersion?: number;
+            /** @enum {string} */
+            enforcement?: "WARN" | "BLOCK";
+            stages?: components["schemas"]["Stage"][];
+        };
+        ChangeNotebookStudentStatusCommand: {
+            /** @enum {string} */
+            status: "PREPARING" | "STUDYING" | "WAITING_EXAM" | "PASSED" | "DROPPED";
+        };
+        MarkNotebookStageCommand: {
+            done: boolean;
+            /** @default false */
+            inProgress: boolean;
+            /** Format: date */
+            doneAt?: string;
+            note?: string;
+            /** @default false */
+            force: boolean;
+        };
+        SaveNotebookSessionCommand: {
+            /** @example ROAD */
+            stageCode: string;
+            /** Format: date */
+            sessionDate: string;
+            /** Format: int32 */
+            durationMinutes?: number;
+            distanceKm?: number;
+            details?: {
+                [key: string]: unknown;
+            };
+            note?: string;
+            /** @default false */
+            force: boolean;
+        };
+        ApiResponseNotebookSessionResponse: {
+            message?: string;
+            data?: components["schemas"]["NotebookSessionResponse"];
+            path?: string;
+        };
+        NotebookSessionResponse: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            studentId?: string;
+            stageCode?: string;
+            /** Format: date */
+            sessionDate?: string;
+            /** Format: int32 */
+            durationMinutes?: number;
+            distanceKm?: number;
+            details?: {
+                [key: string]: unknown;
+            };
+            note?: string;
+            /** Format: date-time */
+            createdAt?: string;
+        };
+        SaveNotebookPaymentCommand: {
+            /**
+             * Format: int64
+             * @description VND, > 0
+             * @example 3000000
+             */
+            amount?: number;
+            /** Format: date */
+            paidOn: string;
+            note?: string;
+        };
+        ApiResponseNotebookPaymentResponse: {
+            message?: string;
+            data?: components["schemas"]["NotebookPaymentResponse"];
+            path?: string;
+        };
+        NotebookPaymentResponse: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            studentId?: string;
+            /** Format: int64 */
+            amount?: number;
+            /** Format: date */
+            paidOn?: string;
+            note?: string;
+            /** Format: date-time */
+            createdAt?: string;
+        };
+        SaveNotebookCourseCommand: {
+            /** @example Khóa B tháng 9 */
+            name: string;
+            /**
+             * Format: uuid
+             * @description Training level (hạng bằng) id; every student follows its template
+             * @example 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19
+             */
+            trainingLevelId: string;
+            /**
+             * Format: date
+             * @description Khai giảng date; optional
+             * @example 2026-09-01
+             */
+            openingDate?: string;
+            /**
+             * Format: date
+             * @description Expected completion date; optional, null or omitted clears it on PUT
+             * @example 2026-12-01
+             */
+            expectedEndDate?: string;
+        };
+        ApiResponseNotebookCourseResponse: {
+            message?: string;
+            data?: components["schemas"]["NotebookCourseResponse"];
+            path?: string;
+        };
+        NotebookCourseResponse: {
+            /** Format: uuid */
+            id?: string;
+            /** @example Khóa B tháng 9 */
+            name?: string;
+            /** Format: uuid */
+            trainingLevelId?: string;
+            /** Format: date */
+            openingDate?: string;
+            /**
+             * Format: date
+             * @description Expected completion date; null when unknown
+             * @example 2026-12-01
+             */
+            expectedEndDate?: string;
+            /** @enum {string} */
+            status?: "NOT_STARTED" | "ACTIVE" | "ENDED";
+            /**
+             * Format: int64
+             * @example 12
+             */
+            studentCount?: number;
+            /** Format: date-time */
+            createdAt?: string;
+        };
+        ChangeNotebookCourseStatusCommand: {
+            /** @enum {string} */
+            status: "NOT_STARTED" | "ACTIVE" | "ENDED";
         };
         PushTokenCommand: {
             /**
@@ -1985,10 +2900,30 @@ export interface components {
              * @example uploads/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19.jpg
              */
             coverImageObjectKey?: string;
+            /**
+             * @description How the account signs in: PASSWORD if only by password, OAUTH2 if only through Google/Facebook, ALL if both. PASSWORD/ALL use the password account-deletion flow, OAUTH2 the email-OTP one.
+             * @example PASSWORD
+             * @enum {string}
+             */
+            accountType?: "PASSWORD" | "OAUTH2" | "ALL";
         };
         ModeratePostCommand: {
-            /** @enum {string} */
+            /**
+             * @description New status
+             * @example REJECTED
+             * @enum {string}
+             */
             status: "DRAFT" | "REJECTED";
+            /**
+             * @description Short reason shown to the author and stored in the audit log
+             * @example Nội dung quảng cáo không được phép
+             */
+            reason: string;
+            /**
+             * @description Optional internal details for other administrators
+             * @example Bài viết chứa liên kết tới trang bán khóa học bên ngoài.
+             */
+            description?: string;
         };
         BulkCreateTrainingLevelsCommand: {
             /** @description Training levels to create */
@@ -2144,6 +3079,34 @@ export interface components {
              * @description Id of the comment being replied to, omitted for a top-level comment
              */
             parentCommentId?: string;
+        };
+        CreatePersonalNotebookCommand: {
+            /**
+             * Format: uuid
+             * @description Training level the notebook follows; one live notebook per level
+             * @example 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19
+             */
+            trainingLevelId: string;
+            /** @example Nguyễn Văn An */
+            fullName: string;
+            /**
+             * @description Digits only; optional
+             * @example 0912345678
+             */
+            phoneNumber?: string;
+            /**
+             * Format: int64
+             * @description Total course fee in VND; defaults to 0
+             * @example 12000000
+             */
+            totalFee?: number;
+            /** @example Học buổi tối */
+            note?: string;
+            /**
+             * @description Already-hosted avatar URL; optional
+             * @example https://images.tidala.vn/avatars/student.jpg
+             */
+            avatarUrl?: string;
         };
         RequestImageUploadCommand: {
             /**
@@ -2539,6 +3502,108 @@ export interface components {
         LoginResponse: {
             user?: components["schemas"]["LoginUserSummary"];
             tokens?: components["schemas"]["TokenPairResponse"];
+        };
+        ModerationReasonCommand: {
+            /**
+             * @description Short reason shown to the author and stored in the audit log
+             * @example Nội dung quảng cáo không được phép
+             */
+            reason: string;
+            /**
+             * @description Optional internal details for other administrators
+             * @example Bài viết chứa liên kết tới trang bán khóa học bên ngoài, đã báo cáo 3 lần.
+             */
+            description?: string;
+        };
+        AdminUserResponse: {
+            /**
+             * Format: uuid
+             * @description User id
+             * @example b3f1e2d4-1234-4567-89ab-cdef01234567
+             */
+            id?: string;
+            /**
+             * @description Email; null for a Facebook account with no verified email
+             * @example jane.doe@example.com
+             */
+            email?: string | null;
+            /**
+             * @description Display name
+             * @example Jane Doe
+             */
+            fullName?: string;
+            /**
+             * @description Phone number
+             * @example 0901234567
+             */
+            phoneNumber?: string | null;
+            /**
+             * @description Account role
+             * @example STUDENT
+             * @enum {string}
+             */
+            role?: "STUDENT" | "TEACHER" | "ADMIN";
+            /**
+             * @description Stored account status; a timed ban does not change it (see banned)
+             * @example ACTIVE
+             * @enum {string}
+             */
+            status?: "INACTIVE" | "ACTIVE" | "BANNED";
+            /**
+             * @description Whether the email is verified
+             * @example true
+             */
+            emailVerified?: boolean;
+            /**
+             * @description Avatar image URL
+             * @example https://cdn.tidala.com/uploads/avatar.jpg
+             */
+            avatarUrl?: string | null;
+            /**
+             * Format: date-time
+             * @description When the account was created
+             * @example 2026-10-01T08:30:00Z
+             */
+            createdAt?: string;
+            /**
+             * @description Whether the account is banned right now
+             * @example true
+             */
+            banned?: boolean;
+            /**
+             * Format: date-time
+             * @description End of the current ban; null when not banned or banned with no end date
+             * @example 2026-10-19T08:30:00Z
+             */
+            bannedUntil?: string | null;
+            /**
+             * @description Reason of the current ban; null when not banned
+             * @example Spam bình luận quảng cáo
+             */
+            banReason?: string | null;
+        };
+        ApiResponseAdminUserResponse: {
+            message?: string;
+            data?: components["schemas"]["AdminUserResponse"];
+            path?: string;
+        };
+        BanUserCommand: {
+            /**
+             * Format: int32
+             * @description Ban length in whole days, counted from now
+             * @example 7
+             */
+            days: number;
+            /**
+             * @description Reason shown to the user and stored in the audit log
+             * @example Spam bình luận quảng cáo
+             */
+            reason: string;
+            /**
+             * @description Optional internal details for other administrators
+             * @example Đã nhắc nhở 2 lần qua báo cáo.
+             */
+            description?: string;
         };
         SaveTeacherProfileDraftCommand: {
             /**
@@ -3220,6 +4285,94 @@ export interface components {
              */
             last?: boolean;
         };
+        ApiResponsePageResponseNotebookStudentResponse: {
+            message?: string;
+            data?: components["schemas"]["PageResponseNotebookStudentResponse"];
+            path?: string;
+        };
+        /** @description One page of results */
+        PageResponseNotebookStudentResponse: {
+            /** @description Rows on this page */
+            content?: components["schemas"]["NotebookStudentResponse"][];
+            /**
+             * Format: int32
+             * @description Zero-based page index
+             * @example 0
+             */
+            page?: number;
+            /**
+             * Format: int32
+             * @description Requested page size
+             * @example 20
+             */
+            size?: number;
+            /**
+             * Format: int64
+             * @description Total rows across all pages
+             * @example 34
+             */
+            totalElements?: number;
+            /**
+             * Format: int32
+             * @description Total number of pages
+             * @example 2
+             */
+            totalPages?: number;
+            /**
+             * @description Whether this is the final page
+             * @example false
+             */
+            last?: boolean;
+        };
+        ApiResponseListNotebookSessionResponse: {
+            message?: string;
+            data?: components["schemas"]["NotebookSessionResponse"][];
+            path?: string;
+        };
+        ApiResponseListNotebookPaymentResponse: {
+            message?: string;
+            data?: components["schemas"]["NotebookPaymentResponse"][];
+            path?: string;
+        };
+        ApiResponsePageResponseNotebookCourseResponse: {
+            message?: string;
+            data?: components["schemas"]["PageResponseNotebookCourseResponse"];
+            path?: string;
+        };
+        /** @description One page of results */
+        PageResponseNotebookCourseResponse: {
+            /** @description Rows on this page */
+            content?: components["schemas"]["NotebookCourseResponse"][];
+            /**
+             * Format: int32
+             * @description Zero-based page index
+             * @example 0
+             */
+            page?: number;
+            /**
+             * Format: int32
+             * @description Requested page size
+             * @example 20
+             */
+            size?: number;
+            /**
+             * Format: int64
+             * @description Total rows across all pages
+             * @example 34
+             */
+            totalElements?: number;
+            /**
+             * Format: int32
+             * @description Total number of pages
+             * @example 2
+             */
+            totalPages?: number;
+            /**
+             * @description Whether this is the final page
+             * @example false
+             */
+            last?: boolean;
+        };
         ApiResponsePageResponseNotificationResponse: {
             message?: string;
             data?: components["schemas"]["PageResponseNotificationResponse"];
@@ -3231,7 +4384,7 @@ export interface components {
             /** Format: uuid */
             actorId?: string;
             /** @enum {string} */
-            kind?: "POST_COMMENTED" | "COMMENT_REPLIED" | "POST_LIKED" | "TEACHER_PROFILE_REVIEWED";
+            kind?: "POST_COMMENTED" | "COMMENT_REPLIED" | "POST_LIKED" | "TEACHER_PROFILE_REVIEWED" | "POST_MODERATED" | "POST_REMOVED" | "COMMENT_REMOVED";
             /** @enum {string} */
             deliveryType?: "INSTANT" | "DIGEST";
             data?: {
@@ -3276,6 +4429,11 @@ export interface components {
              * @example false
              */
             last?: boolean;
+        };
+        ApiResponseListNotebookStudentResponse: {
+            message?: string;
+            data?: components["schemas"]["NotebookStudentResponse"][];
+            path?: string;
         };
         ApiResponsePageResponseImageUploadResponse: {
             message?: string;
@@ -3385,6 +4543,110 @@ export interface components {
              */
             last?: boolean;
         };
+        ApiResponsePageResponseAdminUserResponse: {
+            message?: string;
+            data?: components["schemas"]["PageResponseAdminUserResponse"];
+            path?: string;
+        };
+        /** @description One page of results */
+        PageResponseAdminUserResponse: {
+            /** @description Rows on this page */
+            content?: components["schemas"]["AdminUserResponse"][];
+            /**
+             * Format: int32
+             * @description Zero-based page index
+             * @example 0
+             */
+            page?: number;
+            /**
+             * Format: int32
+             * @description Requested page size
+             * @example 20
+             */
+            size?: number;
+            /**
+             * Format: int64
+             * @description Total rows across all pages
+             * @example 34
+             */
+            totalElements?: number;
+            /**
+             * Format: int32
+             * @description Total number of pages
+             * @example 2
+             */
+            totalPages?: number;
+            /**
+             * @description Whether this is the final page
+             * @example false
+             */
+            last?: boolean;
+        };
+        AdminAuditLogResponse: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            actorId?: string;
+            /** @enum {string} */
+            action?: "POST_STATUS_CHANGED" | "POST_PINNED" | "POST_UNPINNED" | "POST_DELETED" | "COMMENT_DELETED" | "REPORT_RESOLVED" | "CREATED" | "UPDATED" | "DELETED" | "BULK_CREATED" | "USER_BANNED" | "USER_UNBANNED";
+            /** @enum {string} */
+            targetType?: "POST" | "COMMENT" | "REPORT" | "PROVINCE" | "DISTRICT" | "TRAINING_LEVEL" | "TAG" | "USER";
+            /** Format: uuid */
+            targetId?: string;
+            reason?: string;
+            description?: string;
+            metadata?: {
+                [key: string]: string;
+            };
+            ipAddress?: string;
+            userAgent?: string;
+            /** Format: date-time */
+            createdAt?: string;
+        };
+        ApiResponsePageResponseAdminAuditLogResponse: {
+            message?: string;
+            data?: components["schemas"]["PageResponseAdminAuditLogResponse"];
+            path?: string;
+        };
+        /** @description One page of results */
+        PageResponseAdminAuditLogResponse: {
+            /** @description Rows on this page */
+            content?: components["schemas"]["AdminAuditLogResponse"][];
+            /**
+             * Format: int32
+             * @description Zero-based page index
+             * @example 0
+             */
+            page?: number;
+            /**
+             * Format: int32
+             * @description Requested page size
+             * @example 20
+             */
+            size?: number;
+            /**
+             * Format: int64
+             * @description Total rows across all pages
+             * @example 34
+             */
+            totalElements?: number;
+            /**
+             * Format: int32
+             * @description Total number of pages
+             * @example 2
+             */
+            totalPages?: number;
+            /**
+             * @description Whether this is the final page
+             * @example false
+             */
+            last?: boolean;
+        };
+        ApiResponseAdminAuditLogResponse: {
+            message?: string;
+            data?: components["schemas"]["AdminAuditLogResponse"];
+            path?: string;
+        };
         DeleteAccountCommand: {
             /**
              * @description Current account password
@@ -3417,6 +4679,7 @@ export interface operations {
             };
             cookie?: never;
         };
+        /** @description `progressTemplate` is the stage checklist notebook students of this level follow. Omit it to use the built-in default: motorbike classes (A1, A, A2) and car/truck classes B1, B, C1, C each have one; levels beyond C have none, so notebook students cannot be enrolled on them until a template is set. */
         requestBody: {
             content: {
                 "application/json": components["schemas"]["SaveTrainingLevelCommand"];
@@ -3895,15 +5158,6 @@ export interface operations {
                     "*/*": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Authenticated but not a STUDENT */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
-                };
-            };
             /** @description No live review with this id belongs to the caller */
             404: {
                 headers: {
@@ -3937,15 +5191,6 @@ export interface operations {
             };
             /** @description No, expired, or invalid bearer access token */
             401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Authenticated but not a STUDENT */
-            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -4554,6 +5799,845 @@ export interface operations {
             };
         };
     };
+    getStudent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The student with progress and stage totals */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    updateStudent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookStudentCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated student */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_TRAINING_LEVEL_UNSUPPORTED */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND, NOTEBOOK_COURSE_NOT_FOUND, TRAINING_LEVEL_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STUDENT_CONCURRENTLY_MODIFIED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    deleteStudent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Student soft-deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    changeStatus_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ChangeNotebookStudentStatusCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated student */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STUDENT_CONCURRENTLY_MODIFIED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    markStage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+                stageCode: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MarkNotebookStageCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated student */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_STAGE_NOT_FOUND */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STAGE_PREREQUISITES_UNMET, NOTEBOOK_STAGE_BLOCKED, NOTEBOOK_STUDENT_CONCURRENTLY_MODIFIED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    markStageItem: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+                stageCode: string;
+                itemCode: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MarkNotebookStageCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated student */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_STAGE_NOT_FOUND, NOTEBOOK_STAGE_ITEM_NOT_FOUND */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STAGE_PREREQUISITES_UNMET, NOTEBOOK_STAGE_BLOCKED, NOTEBOOK_STUDENT_CONCURRENTLY_MODIFIED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    updateSession: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookSessionCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated session */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookSessionResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_STAGE_NOT_FOUND, NOTEBOOK_SESSION_FIELD_INVALID */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_SESSION_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STAGE_PREREQUISITES_UNMET, NOTEBOOK_STAGE_BLOCKED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    deleteSession: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Session soft-deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_SESSION_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    updatePayment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookPaymentCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated payment */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookPaymentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_PAYMENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    deletePayment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Payment soft-deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_PAYMENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getCourse: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The course */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookCourseResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_COURSE_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    updateCourse: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookCourseCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated course */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookCourseResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_TRAINING_LEVEL_UNSUPPORTED */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_COURSE_NOT_FOUND, TRAINING_LEVEL_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STUDENT_CONCURRENTLY_MODIFIED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    deleteCourse: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Course and its students soft-deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_COURSE_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    changeCourseStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ChangeNotebookCourseStatusCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated course */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookCourseResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_COURSE_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
     registerPushToken: {
         parameters: {
             query?: never;
@@ -4634,7 +6718,644 @@ export interface operations {
             };
         };
     };
+    markAllRead: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description All notifications marked read */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The notebook */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
     update_4: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookStudentCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated notebook */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STUDENT_CONCURRENTLY_MODIFIED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    delete_5: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    changeStatus_2: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ChangeNotebookStudentStatusCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated notebook */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STUDENT_CONCURRENTLY_MODIFIED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    markStage_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+                stageCode: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MarkNotebookStageCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated notebook */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_STAGE_NOT_FOUND */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STAGE_PREREQUISITES_UNMET, NOTEBOOK_STAGE_BLOCKED, NOTEBOOK_STUDENT_CONCURRENTLY_MODIFIED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    markItem: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+                stageCode: string;
+                itemCode: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MarkNotebookStageCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated notebook */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_STAGE_NOT_FOUND, NOTEBOOK_STAGE_ITEM_NOT_FOUND */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STAGE_PREREQUISITES_UNMET, NOTEBOOK_STAGE_BLOCKED, NOTEBOOK_STUDENT_CONCURRENTLY_MODIFIED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    updateSession_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookSessionCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated session */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookSessionResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_STAGE_NOT_FOUND, NOTEBOOK_SESSION_FIELD_INVALID */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's session: NOTEBOOK_SESSION_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STAGE_PREREQUISITES_UNMET, NOTEBOOK_STAGE_BLOCKED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    deleteSession_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's session: NOTEBOOK_SESSION_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    updatePayment_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookPaymentCommand"];
+            };
+        };
+        responses: {
+            /** @description The updated payment */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookPaymentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's payment: NOTEBOOK_PAYMENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    deletePayment_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Deleted */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's payment: NOTEBOOK_PAYMENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    update_5: {
         parameters: {
             query?: never;
             header?: never;
@@ -4705,7 +7426,7 @@ export interface operations {
             };
         };
     };
-    delete_5: {
+    delete_6: {
         parameters: {
             query?: never;
             header?: never;
@@ -4754,7 +7475,7 @@ export interface operations {
             };
         };
     };
-    update_5: {
+    update_6: {
         parameters: {
             query?: never;
             header?: never;
@@ -4807,7 +7528,7 @@ export interface operations {
             };
         };
     };
-    delete_6: {
+    delete_7: {
         parameters: {
             query?: never;
             header?: never;
@@ -5143,6 +7864,113 @@ export interface operations {
             };
         };
     };
+    pin: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Post pinned, or already pinned */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponsePostDetailResponse"];
+                };
+            };
+            /** @description AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description POST_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description POST_INVALID_TRANSITION or POST_PIN_LIMIT_EXCEEDED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    unpin: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Post unpinned, or was not pinned */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponsePostDetailResponse"];
+                };
+            };
+            /** @description AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description POST_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
     list: {
         parameters: {
             query: {
@@ -5182,6 +8010,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
+        /** @description `progressTemplate` is the stage checklist notebook students of this level follow. Omit it to use the built-in default: motorbike classes (A1, A, A2) and car/truck classes B1, B, C1, C each have one; levels beyond C have none, so notebook students cannot be enrolled on them until a template is set. */
         requestBody: {
             content: {
                 "application/json": components["schemas"]["SaveTrainingLevelCommand"];
@@ -6107,6 +8936,820 @@ export interface operations {
             };
         };
     };
+    listSessions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The student's sessions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseListNotebookSessionResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    createSession: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookSessionCommand"];
+            };
+        };
+        responses: {
+            /** @description The created session */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookSessionResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_STAGE_NOT_FOUND, NOTEBOOK_SESSION_FIELD_INVALID */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STAGE_PREREQUISITES_UNMET, NOTEBOOK_STAGE_BLOCKED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listPayments: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The student's payments */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseListNotebookPaymentResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    createPayment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookPaymentCommand"];
+            };
+        };
+        responses: {
+            /** @description The created payment */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookPaymentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listCourses: {
+        parameters: {
+            query?: {
+                status?: "NOT_STARTED" | "ACTIVE" | "ENDED";
+                keyword?: string;
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A page of courses */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponsePageResponseNotebookCourseResponse"];
+                };
+            };
+            /** @description Invalid request: INVALID_SORT_PROPERTY */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    createCourse: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookCourseCommand"];
+            };
+        };
+        responses: {
+            /** @description The created course */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookCourseResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_TRAINING_LEVEL_UNSUPPORTED */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: TRAINING_LEVEL_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listCourseStudents: {
+        parameters: {
+            query?: {
+                status?: "PREPARING" | "STUDYING" | "WAITING_EXAM" | "PASSED" | "DROPPED";
+                keyword?: string;
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
+            };
+            header?: never;
+            path: {
+                courseId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A page of the course's students */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponsePageResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: INVALID_PARAMETER_VALUE, INVALID_SORT_PROPERTY */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_COURSE_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    createStudent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                courseId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookStudentCommand"];
+            };
+        };
+        responses: {
+            /** @description The enrolled student */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_TRAINING_LEVEL_UNSUPPORTED */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not found for this teacher: NOTEBOOK_COURSE_NOT_FOUND, TRAINING_LEVEL_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    list_7: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The caller's notebooks */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseListNotebookStudentResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    create_6: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreatePersonalNotebookCommand"];
+            };
+        };
+        responses: {
+            /** @description The created notebook, with its stage checklist */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_TRAINING_LEVEL_UNSUPPORTED */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unknown training level: TRAINING_LEVEL_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: PERSONAL_NOTEBOOK_ALREADY_EXISTS */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listSessions_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The sessions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseListNotebookSessionResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    createSession_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookSessionCommand"];
+            };
+        };
+        responses: {
+            /** @description The created session */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookSessionResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, NOTEBOOK_STAGE_NOT_FOUND, NOTEBOOK_SESSION_FIELD_INVALID */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict: NOTEBOOK_STAGE_PREREQUISITES_UNMET, NOTEBOOK_STAGE_BLOCKED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listPayments_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The payments */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseListNotebookPaymentResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    createPayment_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveNotebookPaymentCommand"];
+            };
+        };
+        responses: {
+            /** @description The created payment */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseNotebookPaymentResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a STUDENT: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Not the caller's notebook: NOTEBOOK_STUDENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
     requestUpload: {
         parameters: {
             query?: never;
@@ -6149,7 +9792,7 @@ export interface operations {
             };
         };
     };
-    list_7: {
+    list_8: {
         parameters: {
             query: {
                 provinceId?: string;
@@ -6182,7 +9825,7 @@ export interface operations {
             };
         };
     };
-    create_6: {
+    create_7: {
         parameters: {
             query?: never;
             header?: never;
@@ -6474,7 +10117,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description Request accepted; an OTP was sent if the email belongs to an eligible account */
+            /** @description OTP sent */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -6485,6 +10128,24 @@ export interface operations {
             };
             /** @description Validation failed, or the request body is malformed */
             400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No account eligible to reset its password (unknown, deleted, unverified, or banned) */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description OAuth-only account; it signs in with Google/Facebook and has no password */
+            409: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -6562,6 +10223,15 @@ export interface operations {
             };
             /** @description The provider token failed server-side verification */
             401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description The account is banned; the message carries the ban end and the reason */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -6782,13 +10452,288 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Invalid email or password, or the account isn't eligible to log in (banned, deleted, locked out from too many failed attempts, or not yet email-verified) — all collapse into the same generic failure */
+            /** @description Invalid email or password, or the account isn't eligible to log in (banned with a wrong password, deleted, locked out from too many failed attempts, or not yet email-verified) — all collapse into the same generic failure */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
                     "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description The account is banned; the message carries the ban end and the reason */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    unbanUser: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ModerationReasonCommand"];
+            };
+        };
+        responses: {
+            /** @description Updated account */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseAdminUserResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, INVALID_PARAMETER_VALUE */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not an ADMIN: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unknown or deleted account: USER_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Account is not banned: USER_NOT_BANNED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    banUser: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BanUserCommand"];
+            };
+        };
+        responses: {
+            /** @description Updated account */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseAdminUserResponse"];
+                };
+            };
+            /** @description Invalid request: VALIDATION_FAILED, MALFORMED_REQUEST, INVALID_PARAMETER_VALUE */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not an ADMIN: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unknown or deleted account: USER_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Target is an administrator: ADMIN_BAN_NOT_ALLOWED */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    delete_8: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ModerationReasonCommand"];
+            };
+        };
+        responses: {
+            /** @description Post soft-deleted */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseVoid"];
+                };
+            };
+            /** @description VALIDATION_FAILED or MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description POST_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    delete_9: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ModerationReasonCommand"];
+            };
+        };
+        responses: {
+            /** @description Comment soft-deleted */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseVoid"];
+                };
+            };
+            /** @description VALIDATION_FAILED or MALFORMED_REQUEST */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description COMMENT_NOT_FOUND */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
                 };
             };
         };
@@ -6884,7 +10829,7 @@ export interface operations {
             };
         };
     };
-    list_8: {
+    list_9: {
         parameters: {
             query: {
                 provinceSlug?: string;
@@ -6975,7 +10920,7 @@ export interface operations {
             };
         };
     };
-    list_9: {
+    list_10: {
         parameters: {
             query: {
                 pageable: components["schemas"]["Pageable"];
@@ -7024,7 +10969,7 @@ export interface operations {
             };
         };
     };
-    list_10: {
+    list_11: {
         parameters: {
             query: {
                 pageable: components["schemas"]["Pageable"];
@@ -7064,7 +11009,7 @@ export interface operations {
             };
         };
     };
-    get: {
+    get_1: {
         parameters: {
             query?: never;
             header?: never;
@@ -7207,6 +11152,99 @@ export interface operations {
             };
         };
     };
+    pinned: {
+        parameters: {
+            query?: {
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Pinned post page */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponsePageResponsePostSummaryResponse"];
+                };
+            };
+            /** @description INVALID_SORT_PROPERTY */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listStudents: {
+        parameters: {
+            query?: {
+                courseId?: string;
+                status?: "PREPARING" | "STUDYING" | "WAITING_EXAM" | "PASSED" | "DROPPED";
+                keyword?: string;
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A page of students */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponsePageResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: INVALID_PARAMETER_VALUE, INVALID_SORT_PROPERTY */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not a TEACHER: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
     savedPosts: {
         parameters: {
             query?: {
@@ -7253,7 +11291,7 @@ export interface operations {
             };
         };
     };
-    list_11: {
+    list_12: {
         parameters: {
             query?: {
                 status?: "DRAFT" | "PUBLISHED" | "REJECTED";
@@ -7339,9 +11377,10 @@ export interface operations {
             };
         };
     };
-    list_12: {
+    list_13: {
         parameters: {
             query?: {
+                unread?: boolean;
                 /** @description Zero-based page index (0..N) */
                 page?: number;
                 /** @description The size of the page to be returned */
@@ -7549,7 +11588,64 @@ export interface operations {
             };
         };
     };
-    list_13: {
+    listUsers: {
+        parameters: {
+            query?: {
+                role?: "STUDENT" | "TEACHER" | "ADMIN";
+                keyword?: string;
+                banned?: boolean;
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A page of users */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponsePageResponseAdminUserResponse"];
+                };
+            };
+            /** @description Invalid request: INVALID_PARAMETER_VALUE, INVALID_SORT_PROPERTY */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not an ADMIN: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    list_14: {
         parameters: {
             query?: {
                 status?: "DRAFT" | "PUBLISHED" | "REJECTED";
@@ -7653,24 +11749,114 @@ export interface operations {
             };
         };
     };
-    delete_7: {
+    listStudents_1: {
         parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
+            query?: {
+                teacherUserId?: string;
+                courseId?: string;
+                status?: "PREPARING" | "STUDYING" | "WAITING_EXAM" | "PASSED" | "DROPPED";
+                keyword?: string;
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
             };
+            header?: never;
+            path?: never;
             cookie?: never;
         };
         requestBody?: never;
         responses: {
-            /** @description Post soft-deleted */
+            /** @description A page of students */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": components["schemas"]["ApiResponseVoid"];
+                    "*/*": components["schemas"]["ApiResponsePageResponseNotebookStudentResponse"];
+                };
+            };
+            /** @description Invalid request: INVALID_PARAMETER_VALUE, INVALID_SORT_PROPERTY */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not an ADMIN: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    list_15: {
+        parameters: {
+            query?: {
+                /** @description Only entries by this administrator */
+                actorId?: string;
+                /** @description Only this action */
+                action?: "POST_STATUS_CHANGED" | "POST_PINNED" | "POST_UNPINNED" | "POST_DELETED" | "COMMENT_DELETED" | "REPORT_RESOLVED" | "CREATED" | "UPDATED" | "DELETED" | "BULK_CREATED" | "USER_BANNED" | "USER_UNBANNED";
+                /** @description Only this kind of target */
+                targetType?: "POST" | "COMMENT" | "REPORT" | "PROVINCE" | "DISTRICT" | "TRAINING_LEVEL" | "TAG" | "USER";
+                /** @description Only entries about this record */
+                targetId?: string;
+                /**
+                 * @description Inclusive lower bound on createdAt
+                 * @example 2026-09-01T00:00:00Z
+                 */
+                from?: string;
+                /**
+                 * @description Exclusive upper bound on createdAt
+                 * @example 2026-10-01T00:00:00Z
+                 */
+                to?: string;
+                /** @description Zero-based page index (0..N) */
+                page?: number;
+                /** @description The size of the page to be returned */
+                size?: number;
+                /** @description Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+                sort?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Audit log page */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponsePageResponseAdminAuditLogResponse"];
+                };
+            };
+            /** @description INVALID_PARAMETER_VALUE, INVALID_SORT_PROPERTY, or ADMIN_AUDIT_LOG_INVALID_RANGE */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
                 };
             };
             /** @description AUTHENTICATION_REQUIRED */
@@ -7691,7 +11877,56 @@ export interface operations {
                     "*/*": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description POST_NOT_FOUND */
+        };
+    };
+    detail_3: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Audit log entry */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseAdminAuditLogResponse"];
+                };
+            };
+            /** @description INVALID_PARAMETER_VALUE */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description ADMIN_AUDIT_LOG_NOT_FOUND */
             404: {
                 headers: {
                     [name: string]: unknown;
@@ -7758,55 +11993,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    delete_8: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Comment soft-deleted */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiResponseVoid"];
-                };
-            };
-            /** @description AUTHENTICATION_REQUIRED */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description ACCESS_DENIED */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description COMMENT_NOT_FOUND */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
                 };
             };
         };
