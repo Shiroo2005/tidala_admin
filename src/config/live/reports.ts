@@ -3,6 +3,7 @@ import type { components } from "@/generated/api";
 import type { ReportDetailData, ReportTarget, ResolveReportRequest } from "@/features/admin/report-management/types/report.type";
 import { realRequest } from "../realApi";
 import { fetchAll, media, unsupported, type Params, type Route } from "./shared";
+import { allAdminUsers } from "./students";
 import { allTeachers } from "./teachers";
 
 type Report = components["schemas"]["ReportResponse"];
@@ -44,18 +45,21 @@ async function loadTarget(report: Report, teachers: Map<string, { fullName?: str
   };
 }
 
-// The backend returns only the reporter's id, so there is no reporter name, email or avatar to show.
+// The report payload carries the reporter's id and email; the name and avatar are
+// resolved from the admin user list (the reference API has no get-user-by-id).
 async function uiReports(reports: Report[]): Promise<ReportDetailData[]> {
   const teachers = new Map((await allTeachers().catch(() => [])).map((t) => [t.userId!, t]));
+  const users = new Map((await allAdminUsers().catch(() => [])).map((u) => [u.id!, u]));
   return Promise.all(
     reports.map(async (report) => {
       const status = toUiStatus(report.status);
+      const reporter = report.reporterId ? users.get(report.reporterId) : undefined;
       return {
         id: report.id!,
         reporterUserId: report.reporterId ?? "",
-        reporterName: `Người dùng ${shortId(report.reporterId)}`,
-        reporterEmail: "",
-        reporterAvatarUrl: "",
+        reporterName: reporter?.fullName ?? `Người dùng ${shortId(report.reporterId)}`,
+        reporterEmail: report.reporterEmail ?? reporter?.email ?? "",
+        reporterAvatarUrl: media(reporter?.avatarUrl),
         targetType: report.targetType!,
         targetId: report.targetId,
         target: await loadTarget(report, teachers),

@@ -6,6 +6,7 @@ import type {
 } from "../../types/report.type";
 import { TARGET_TYPE_LABELS } from "./constants";
 import { SectionLabel } from "./primitives";
+import { ReporterDetailButton } from "../ReporterDetailButton";
 import { ReportTargetContent } from "./TargetViews";
 
 interface OverviewPanelProps {
@@ -55,6 +56,9 @@ export const OverviewPanel = ({
               <FiMail size={12} className="shrink-0 text-slate-400" />
               <span className="truncate">{report.reporterEmail}</span>
             </p>
+          </div>
+          <div className="ml-auto shrink-0">
+            <ReporterDetailButton variant="text" reporterId={report.reporterUserId} reporterEmail={report.reporterEmail} />
           </div>
         </div>
       </div>

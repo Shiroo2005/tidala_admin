@@ -1,4 +1,5 @@
 import { imageUrls } from "@/shared/constants/imageUrls";
+import { ReporterDetailButton } from "./ReporterDetailButton";
 import { getStorageUrl } from "@/shared/utils/url";
 import {
   FiAlertTriangle,
@@ -178,6 +179,7 @@ export const PostReportTable = ({
                   {report.reporterEmail}
                 </span>
               </div>
+              <div className="ml-auto shrink-0"><ReporterDetailButton reporterId={report.reporterUserId} reporterEmail={report.reporterEmail} /></div>
             </div>
           );
         },

@@ -1,4 +1,5 @@
 import { imageUrls } from "@/shared/constants/imageUrls";
+import { ReporterDetailButton } from "./ReporterDetailButton";
 import { getStorageUrl } from "@/shared/utils/url";
 import { FiAlertTriangle, FiEye, FiSlash, FiX, FiMoreHorizontal } from "react-icons/fi";
 import { getReportReasonByIdAndType } from "../constants/report-reasons";
@@ -153,6 +154,7 @@ export const TeacherReportTable = ({
                   {report.reporterEmail}
                 </span>
               </div>
+              <div className="ml-auto shrink-0"><ReporterDetailButton reporterId={report.reporterUserId} reporterEmail={report.reporterEmail} /></div>
             </div>
           );
         },

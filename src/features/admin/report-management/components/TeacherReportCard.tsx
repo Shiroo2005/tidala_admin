@@ -1,4 +1,5 @@
 import { imageUrls } from "@/shared/constants/imageUrls";
+import { ReporterDetailButton } from "./ReporterDetailButton";
 import { getStorageUrl } from "@/shared/utils/url";
 import { Pagination } from "@mui/material";
 import { FiClock, FiEye } from "react-icons/fi";
@@ -153,6 +154,7 @@ export const TeacherReportCard = ({
                     <span className="text-[11px] text-slate-400 truncate">
                       {report.reporterName}
                     </span>
+                    <div className="ml-auto shrink-0"><ReporterDetailButton reporterId={report.reporterUserId} reporterEmail={report.reporterEmail} /></div>
                   </div>
 
                   {/* Time */}

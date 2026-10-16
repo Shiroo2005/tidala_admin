@@ -2,9 +2,10 @@ import { paginate } from "@/demo/store";
 import type { AdminStudentDetail } from "@/features/admin/student-management/types";
 import type { components } from "@/generated/api";
 import { realRequest } from "../realApi";
-import { apiError, fetchAll, media, unsupported, type Params, type Route } from "./shared";
+import { apiError, fetchAll, media, notFound, unsupported, type Params, type Route } from "./shared";
 
 type AdminUser = components["schemas"]["AdminUserResponse"];
+type Report = components["schemas"]["ReportResponse"];
 
 // Students are real accounts in the reference API (api-1 (6).json):
 // GET /api/v1/admin/users?role=STUDENT is the only student listing — there is no
@@ -57,6 +58,44 @@ export const allStudents = (): Promise<AdminStudentDetail[]> => {
 
 const invalidateStudents = () => {
   studentsEntry = null;
+  usersEntry = null;
+};
+
+// All admin-visible accounts (any role), for lookups the reference API cannot do
+// directly — there is no get-user-by-id endpoint. Used by the reporter detail.
+let usersEntry: { at: number; value: Promise<AdminUser[]> } | null = null;
+
+export const allAdminUsers = (): Promise<AdminUser[]> => {
+  if (!usersEntry || Date.now() - usersEntry.at > STUDENTS_TTL_MS) {
+    const value = fetchAll<AdminUser>("/api/v1/admin/users");
+    usersEntry = { at: Date.now(), value };
+    value.catch(() => (usersEntry = null));
+  }
+  return usersEntry.value;
+};
+
+/** Detail for the report screens' "reporter" button, resolved from the admin user list. */
+const reporterDetail = async (id: string) => {
+  const user = (await allAdminUsers()).find((candidate) => candidate.id === id);
+  if (!user) return notFound();
+  const reports = await fetchAll<Report>("/api/v1/reports").catch(() => [] as Report[]);
+  const mine = reports.filter((report) => report.reporterId === id);
+  return {
+    id: user.id ?? id,
+    fullName: user.fullName ?? "",
+    email: user.email ?? "",
+    phoneNumber: user.phoneNumber ?? "",
+    role: user.role ?? "",
+    status: user.banned ? "BANNED" : (user.status ?? ""),
+    banned: Boolean(user.banned),
+    bannedUntil: user.bannedUntil ?? null,
+    banReason: user.banReason ?? null,
+    emailVerified: user.emailVerified ?? false,
+    avatarUrl: media(user.avatarUrl),
+    createdAt: user.createdAt ?? "",
+    totalReports: mine.length,
+    pendingReports: mine.filter((report) => report.status === "PENDING").length,
+  };
 };
 
 export const findStudent = async (id: string): Promise<AdminStudentDetail | undefined> =>
@@ -110,5 +149,9 @@ export const studentRoutes: Route[] = [
   {
     pattern: /^\/admin\/students$/,
     handle: async ({ params }) => paginate(await allStudents(), params),
+  },
+  {
+    pattern: /^\/admin\/reporters\/([^/]+)$/,
+    handle: async ({ id }) => reporterDetail(id!),
   },
 ];

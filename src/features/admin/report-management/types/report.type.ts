@@ -122,3 +122,21 @@ export interface ReportActionData {
 export interface ReportDetailData extends ReportData {
   history: ReportActionData[];
 }
+
+/** Account detail behind the report screens' "reporter" button (admin user list). */
+export interface ReporterDetail {
+  id: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  role: string;
+  status: string;
+  banned: boolean;
+  bannedUntil: string | null;
+  banReason: string | null;
+  emailVerified: boolean;
+  avatarUrl: string;
+  createdAt: string;
+  totalReports: number;
+  pendingReports: number;
+}
