@@ -7,6 +7,10 @@ import { allAdminUsers } from "./students";
 import { allTeachers } from "./teachers";
 
 type Report = components["schemas"]["ReportResponse"];
+type ReportDetail = components["schemas"]["ReportDetailResponse"];
+type ReportAction = components["schemas"]["ReportActionResponse"];
+type ApplyAction = components["schemas"]["ApplyReportActionCommand"];
+type History = ReportDetailData["history"][number];
 type Review = components["schemas"]["ReviewSummary"];
 
 // The backend has five reason codes; the screens have their own per-type lists. Closest match per type.
@@ -18,9 +22,42 @@ const REASON: Record<string, Record<string, string>> = {
 // The screens call a dismissed report REJECTED; the backend has no REVIEWING state.
 const toUiStatus = (status?: string) => (status === "DISMISSED" ? "REJECTED" : status ?? "PENDING");
 
-// Resolving only records an outcome and a note. Actions that should also change an account or content
-// would be recorded without happening, so they are refused until the backend supports them.
-const ACTIONS_WITHOUT_SIDE_EFFECTS = new Set([undefined, "CONTENT_RESTORED"]);
+// The screens' action names, translated to what POST /reports/{id}/actions accepts. The ban length is capped at a year.
+const MAX_BAN_DAYS = 365;
+
+const toApplyAction = ({ action, status, reason, metadata }: ResolveReportRequest): Promise<ApplyAction> | ApplyAction => {
+  if (status === "REJECTED") return { action: "DISMISS", reason };
+  switch (action) {
+    case "WARNING_SENT":
+      return { action: "WARN", reason };
+    case "CONTENT_HIDDEN":
+    case "CONTENT_DELETED":
+      return { action: "REMOVE", reason };
+    case "USER_SUSPENDED":
+      return { action: "BAN", reason, banDays: Number(metadata?.duration_days) };
+    case "USER_BANNED":
+      return unsupported(`khóa tài khoản vĩnh viễn (tối đa ${MAX_BAN_DAYS} ngày)`);
+    default:
+      return unsupported("hành động này từ báo cáo");
+  }
+};
+
+// The history entries the screens show, from the backend's action log.
+const toHistory = (reportId: string, action: ReportAction, index: number, users: Map<string, { fullName?: string; email?: string | null; avatarUrl?: string | null }>): History => {
+  const actor = action.actorId ? users.get(action.actorId) : undefined;
+  const dismissed = action.action === "DISMISS";
+  return {
+    id: `${reportId}-action-${index}`,
+    handler: action.actorId
+      ? { id: action.actorId, fullName: actor?.fullName ?? "Quản trị viên", email: actor?.email ?? "", avatarUrl: actor?.avatarUrl ? media(actor.avatarUrl) : null }
+      : null,
+    action: ({ REMOVE: "CONTENT_HIDDEN", WARN: "WARNING_SENT", BAN: "USER_SUSPENDED", DISMISS: undefined } as const)[action.action!],
+    status: dismissed ? "REJECTED" : "RESOLVED",
+    reason: action.reason ?? null,
+    metadata: action.banDays ? { duration_days: action.banDays } : null,
+    createdAt: action.createdAt ?? "",
+  };
+};
 
 const shortId = (id?: string) => (id ? id.slice(0, 8) : "");
 
@@ -47,7 +84,7 @@ async function loadTarget(report: Report, teachers: Map<string, { fullName?: str
 
 // The report payload carries the reporter's id and email; the name and avatar are
 // resolved from the admin user list (the reference API has no get-user-by-id).
-async function uiReports(reports: Report[]): Promise<ReportDetailData[]> {
+async function uiReports(reports: Report[], actions: ReportAction[] = []): Promise<ReportDetailData[]> {
   const teachers = new Map((await allTeachers().catch(() => [])).map((t) => [t.userId!, t]));
   const users = new Map((await allAdminUsers().catch(() => [])).map((u) => [u.id!, u]));
   return Promise.all(
@@ -69,16 +106,7 @@ async function uiReports(reports: Report[]): Promise<ReportDetailData[]> {
         resolvedAt: report.resolvedAt ?? null,
         createdAt: report.createdAt ?? "",
         updatedAt: report.resolvedAt ?? report.createdAt ?? "",
-        history: report.resolvedAt
-          ? [{
-              id: `${report.id}-resolution`,
-              handler: report.resolvedBy ? { id: report.resolvedBy, fullName: "Quản trị viên", email: "", avatarUrl: null } : null,
-              status: status as ReportDetailData["history"][number]["status"],
-              reason: report.resolutionNote ?? null,
-              metadata: null,
-              createdAt: report.resolvedAt,
-            }]
-          : [],
+        history: actions.map((action, index) => toHistory(report.id!, action, index, users)),
       };
     }),
   );
@@ -112,19 +140,16 @@ export const reportRoutes: Route[] = [
   {
     pattern: /^\/admin\/reports\/([^/]+)\/resolve$/,
     handle: async ({ id, body }) => {
-      const { action, status, reason } = body as ResolveReportRequest;
-      if (!ACTIONS_WITHOUT_SIDE_EFFECTS.has(action)) return unsupported("cảnh báo, ẩn nội dung hoặc khóa tài khoản từ báo cáo");
-      if (status !== "RESOLVED" && status !== "REJECTED") return unsupported(`chuyển báo cáo sang trạng thái ${status}`);
-      const report = await realRequest<Report>({
-        method: "put",
-        url: `/api/v1/reports/${id}/resolve`,
-        data: { outcome: status === "REJECTED" ? "DISMISSED" : "RESOLVED", note: reason },
-      });
-      return (await uiReports([report]))[0];
+      const data = await toApplyAction(body as ResolveReportRequest);
+      const { report, actions } = await realRequest<ReportDetail>({ method: "post", url: `/api/v1/reports/${id}/actions`, data });
+      return (await uiReports([report!], actions))[0];
     },
   },
   {
     pattern: /^\/admin\/reports\/([^/]+)$/,
-    handle: async ({ id }) => (await uiReports([await realRequest<Report>({ method: "get", url: `/api/v1/reports/${id}` })]))[0],
+    handle: async ({ id }) => {
+      const { report, actions } = await realRequest<ReportDetail>({ method: "get", url: `/api/v1/reports/${id}` });
+      return (await uiReports([report!], actions))[0];
+    },
   },
 ];
