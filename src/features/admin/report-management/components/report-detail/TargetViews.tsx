@@ -199,7 +199,13 @@ const TeacherTargetView = ({
   );
 };
 
-const ReviewTargetView = ({ target }: { target: ReviewTarget }) => {
+const ReviewTargetView = ({
+  target,
+  onViewTeacher,
+}: {
+  target: ReviewTarget;
+  onViewTeacher: () => void;
+}) => {
   const reviewerName =
     target.author?.fullName || target.authorName || "Người dùng";
   const reviewerAvatar = getStorageUrl(target.author?.avatarUrl) || imageUrls.fallback.avatar;
@@ -259,6 +265,17 @@ const ReviewTargetView = ({ target }: { target: ReviewTarget }) => {
             <p className="mt-3 truncate text-xs font-semibold text-slate-400">
               Gửi đến giáo viên{" "}
               <span className="font-bold text-slate-600">{target.teacherName}</span>
+              {target.teacher?.id && (
+                <button
+                  type="button"
+                  onClick={onViewTeacher}
+                  className="ml-1.5 inline-flex translate-y-0.5 items-center justify-center p-0.5 text-slate-400 transition-colors hover:text-blue-700"
+                  aria-label="Xem hồ sơ chi tiết giáo viên"
+                  title="Xem hồ sơ chi tiết giáo viên"
+                >
+                  <FiExternalLink size={14} />
+                </button>
+              )}
             </p>
           )}
 
@@ -425,7 +442,21 @@ export const ReportTargetContent = ({ report, onViewTeacherDetail, onViewPostDet
   }
 
   if (report.targetType === "REVIEW") {
-    return <ReviewTargetView target={report.target as ReviewTarget} />;
+    const target = report.target as ReviewTarget;
+    return (
+      <ReviewTargetView
+        target={target}
+        onViewTeacher={() => {
+          if (!target.teacher) return;
+          onViewTeacherDetail({
+            type: "TEACHER",
+            id: target.teacher.id,
+            fullName: target.teacher.fullName,
+            avatarUrl: target.teacher.avatarUrl ?? null,
+          });
+        }}
+      />
+    );
   }
 
   if (report.targetType === "COMMENT") {

@@ -1,3 +1,4 @@
+import { APP_PATHS } from "@/shared/constants/appPaths";
 import { imageUrls } from "@/shared/constants/imageUrls";
 import { getStorageUrl } from "@/shared/utils/url";
 import { Dialog } from "@mui/material";
@@ -310,10 +311,10 @@ export const ReportDetailModal = ({
       reasonLabel={reasonInfo?.label || report.reason}
       reasonDescription={reasonInfo?.description}
       onViewTeacherDetail={(target) => {
-        navigateToTargetDetail(`/admin/teachers/${target.id}`);
+        navigateToTargetDetail(APP_PATHS.ADMIN_TEACHER_DETAIL_WITH_ID(target.id));
       }}
       onViewPostDetail={(target) => {
-        navigateToTargetDetail(`/admin/posts/${target.id}`);
+        navigateToTargetDetail(APP_PATHS.ADMIN_POST_DETAIL_WITH_ID(target.id));
       }}
     />
   );
