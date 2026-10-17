@@ -73,12 +73,16 @@
       "description": "Public posts and author management"
     },
     {
-      "name": "16. Reports",
-      "description": "Reports against teacher profiles and reviews"
-    },
-    {
       "name": "05. Districts",
       "description": "Geography reference data: districts within a province"
+    },
+    {
+      "name": "24. Admin Teachers",
+      "description": "Teacher directory with contact details"
+    },
+    {
+      "name": "16. Reports",
+      "description": "Reports against teacher profiles, reviews, posts, and comments"
     },
     {
       "name": "18. Admin comments",
@@ -1124,98 +1128,6 @@
           },
           "404": {
             "description": "No live review with this id belongs to the caller",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/reports/{id}/resolve": {
-      "put": {
-        "tags": [
-          "16. Reports"
-        ],
-        "summary": "04. Resolve by Id",
-        "operationId": "resolve",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ResolveReportCommand"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Report resolved",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponseReportResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation failed, or the request body is not valid JSON",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "No, expired, or invalid bearer access token",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Authenticated but not an ADMIN",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "No report with this id",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "The report is no longer PENDING",
             "content": {
               "*/*": {
                 "schema": {
@@ -8013,7 +7925,9 @@
               "type": "string",
               "enum": [
                 "TEACHER",
-                "REVIEW"
+                "REVIEW",
+                "POST",
+                "COMMENT"
               ]
             }
           },
@@ -8128,7 +8042,7 @@
                         {
                           "field": "targetType",
                           "code": "INVALID_VALUE",
-                          "message": "must be one of: TEACHER, REVIEW"
+                          "message": "must be one of: TEACHER, REVIEW, POST, COMMENT"
                         }
                       ],
                       "path": "/api/v1/reports"
@@ -8158,11 +8072,22 @@
             }
           },
           "404": {
-            "description": "No teacher profile/review exists with the given targetId",
+            "description": "No live teacher profile/review/comment, or no published post, exists with the given targetId",
             "content": {
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "examples": {
+                  "REPORT_TARGET_NOT_FOUND": {
+                    "description": "REPORT_TARGET_NOT_FOUND",
+                    "value": {
+                      "error_code": "REPORT_TARGET_NOT_FOUND",
+                      "message": "POST 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19 not found",
+                      "errors": [],
+                      "path": "/api/v1/reports"
+                    }
+                  }
                 }
               }
             }
@@ -8182,6 +8107,206 @@
                       "message": "A pending report already exists for TEACHER 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19",
                       "errors": [],
                       "path": "/api/v1/reports"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reports/{id}/actions": {
+      "post": {
+        "tags": [
+          "16. Reports"
+        ],
+        "summary": "04. Apply Action by Id",
+        "operationId": "applyAction",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyReportActionCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Action applied; the report with its history",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseReportDetailResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed, the request body is not valid JSON, or the action doesn't apply to the report's target type",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "examples": {
+                  "VALIDATION_FAILED": {
+                    "description": "BAN without banDays, or a non-DISMISS action without a reason",
+                    "value": {
+                      "error_code": "VALIDATION_FAILED",
+                      "message": "Request validation failed",
+                      "errors": [
+                        {
+                          "field": "banDaysConsistent",
+                          "code": "ASSERT_TRUE",
+                          "message": "BAN requires banDays and every other action forbids it"
+                        }
+                      ],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
+                    }
+                  },
+                  "VALIDATION_FAILED_INVALID_ENUM": {
+                    "description": "action sent a value outside the known enum",
+                    "value": {
+                      "error_code": "VALIDATION_FAILED",
+                      "message": "Request validation failed",
+                      "errors": [
+                        {
+                          "field": "action",
+                          "code": "INVALID_VALUE",
+                          "message": "must be one of: REMOVE, BAN, WARN, DISMISS"
+                        }
+                      ],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
+                    }
+                  },
+                  "MALFORMED_REQUEST": {
+                    "description": "MALFORMED_REQUEST",
+                    "value": {
+                      "error_code": "MALFORMED_REQUEST",
+                      "message": "Malformed request body",
+                      "errors": [],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
+                    }
+                  },
+                  "REPORT_ACTION_NOT_SUPPORTED": {
+                    "description": "REPORT_ACTION_NOT_SUPPORTED",
+                    "value": {
+                      "error_code": "REPORT_ACTION_NOT_SUPPORTED",
+                      "message": "REMOVE is not supported for TEACHER reports",
+                      "errors": [],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No, expired, or invalid bearer access token",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authenticated but not an ADMIN",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No report with this id, the item to REMOVE no longer exists, or BAN/WARN has no live account to land on",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "examples": {
+                  "REPORT_NOT_FOUND": {
+                    "description": "REPORT_NOT_FOUND",
+                    "value": {
+                      "error_code": "REPORT_NOT_FOUND",
+                      "message": "Report 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19 not found",
+                      "errors": [],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
+                    }
+                  },
+                  "REPORT_TARGET_NOT_FOUND": {
+                    "description": "REPORT_TARGET_NOT_FOUND",
+                    "value": {
+                      "error_code": "REPORT_TARGET_NOT_FOUND",
+                      "message": "POST 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b20 not found",
+                      "errors": [],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
+                    }
+                  },
+                  "REPORT_RESPONSIBLE_USER_NOT_FOUND": {
+                    "description": "REPORT_RESPONSIBLE_USER_NOT_FOUND",
+                    "value": {
+                      "error_code": "REPORT_RESPONSIBLE_USER_NOT_FOUND",
+                      "message": "No live account is responsible for COMMENT 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b20",
+                      "errors": [],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The report was dismissed, DISMISS was sent for a report that already had an action, or BAN targets an administrator account",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "examples": {
+                  "REPORT_ALREADY_DISMISSED": {
+                    "description": "REPORT_ALREADY_DISMISSED",
+                    "value": {
+                      "error_code": "REPORT_ALREADY_DISMISSED",
+                      "message": "Report 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19 has been dismissed",
+                      "errors": [],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
+                    }
+                  },
+                  "REPORT_ACTION_NOT_ALLOWED": {
+                    "description": "REPORT_ACTION_NOT_ALLOWED",
+                    "value": {
+                      "error_code": "REPORT_ACTION_NOT_ALLOWED",
+                      "message": "Report 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19 already has an action applied and cannot be dismissed",
+                      "errors": [],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
+                    }
+                  },
+                  "ADMIN_BAN_NOT_ALLOWED": {
+                    "description": "ADMIN_BAN_NOT_ALLOWED",
+                    "value": {
+                      "error_code": "ADMIN_BAN_NOT_ALLOWED",
+                      "message": "User 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b21 is an administrator and cannot be banned",
+                      "errors": [],
+                      "path": "/api/v1/reports/0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19/actions"
                     }
                   }
                 }
@@ -13813,11 +13938,11 @@
         ],
         "responses": {
           "200": {
-            "description": "The report",
+            "description": "The report with its action history",
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponseReportResponse"
+                  "$ref": "#/components/schemas/ApiResponseReportDetailResponse"
                 }
               }
             }
@@ -15158,6 +15283,234 @@
         }
       }
     },
+    "/api/v1/admin/teacher-profiles": {
+      "get": {
+        "tags": [
+          "24. Admin Teachers"
+        ],
+        "summary": "01. List Teachers",
+        "operationId": "list_14",
+        "parameters": [
+          {
+            "name": "provinceSlug",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "districtSlugs",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "trainingLevelSlugs",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "tagSlugs",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "EXPERIENCE_YEAR",
+                "PRICE_LOW_TO_MAX",
+                "PRICE_MAX_TO_LOW"
+              ]
+            }
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "limitDistance",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of teachers with contact details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponsePageResponseAdminTeacherProfileSummary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "districtSlugs was given without provinceSlug, a price sort was given without trainingLevelSlugs, coordinates were incomplete/invalid, limitDistance was invalid or lacked coordinates, or sort has an invalid enum value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "examples": {
+                  "TEACHER_DISTRICT_FILTER_REQUIRES_PROVINCE": {
+                    "description": "TEACHER_DISTRICT_FILTER_REQUIRES_PROVINCE",
+                    "value": {
+                      "error_code": "TEACHER_DISTRICT_FILTER_REQUIRES_PROVINCE",
+                      "message": "districtSlugs requires provinceSlug, since district slugs are only unique per province",
+                      "errors": [],
+                      "path": "/api/v1/admin/teacher-profiles"
+                    }
+                  },
+                  "TEACHER_PRICE_SORT_REQUIRES_TRAINING_LEVEL": {
+                    "description": "TEACHER_PRICE_SORT_REQUIRES_TRAINING_LEVEL",
+                    "value": {
+                      "error_code": "TEACHER_PRICE_SORT_REQUIRES_TRAINING_LEVEL",
+                      "message": "PRICE_LOW_TO_MAX and PRICE_MAX_TO_LOW require trainingLevelSlugs",
+                      "errors": [],
+                      "path": "/api/v1/admin/teacher-profiles"
+                    }
+                  },
+                  "TEACHER_SEARCH_COORDINATES_REQUIRED_TOGETHER": {
+                    "description": "TEACHER_SEARCH_COORDINATES_REQUIRED_TOGETHER",
+                    "value": {
+                      "error_code": "TEACHER_SEARCH_COORDINATES_REQUIRED_TOGETHER",
+                      "message": "lat and lng must be supplied together, or not at all",
+                      "errors": [],
+                      "path": "/api/v1/admin/teacher-profiles"
+                    }
+                  },
+                  "TEACHER_SEARCH_COORDINATES_INVALID": {
+                    "description": "TEACHER_SEARCH_COORDINATES_INVALID",
+                    "value": {
+                      "error_code": "TEACHER_SEARCH_COORDINATES_INVALID",
+                      "message": "lat must be a finite value between -90.0 and 90.0",
+                      "errors": [],
+                      "path": "/api/v1/admin/teacher-profiles"
+                    }
+                  },
+                  "TEACHER_SEARCH_DISTANCE_LIMIT_REQUIRES_COORDINATES": {
+                    "description": "TEACHER_SEARCH_DISTANCE_LIMIT_REQUIRES_COORDINATES",
+                    "value": {
+                      "error_code": "TEACHER_SEARCH_DISTANCE_LIMIT_REQUIRES_COORDINATES",
+                      "message": "limitDistance requires both lat and lng",
+                      "errors": [],
+                      "path": "/api/v1/admin/teacher-profiles"
+                    }
+                  },
+                  "TEACHER_SEARCH_DISTANCE_LIMIT_INVALID": {
+                    "description": "TEACHER_SEARCH_DISTANCE_LIMIT_INVALID",
+                    "value": {
+                      "error_code": "TEACHER_SEARCH_DISTANCE_LIMIT_INVALID",
+                      "message": "limitDistance must be one of: 5, 10, 20 km; was 15",
+                      "errors": [],
+                      "path": "/api/v1/admin/teacher-profiles"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No or invalid bearer token: AUTHENTICATION_REQUIRED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "examples": {
+                  "AUTHENTICATION_REQUIRED": {
+                    "description": "AUTHENTICATION_REQUIRED",
+                    "value": {
+                      "error_code": "AUTHENTICATION_REQUIRED",
+                      "message": "Authentication is required to access this resource",
+                      "errors": [],
+                      "path": "/api/v1/admin/teacher-profiles"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Caller is not an ADMIN: ACCESS_DENIED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                },
+                "examples": {
+                  "ACCESS_DENIED": {
+                    "description": "ACCESS_DENIED",
+                    "value": {
+                      "error_code": "ACCESS_DENIED",
+                      "message": "Access denied",
+                      "errors": [],
+                      "path": "/api/v1/admin/teacher-profiles"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/admin/posts": {
       "get": {
         "tags": [
@@ -15165,7 +15518,7 @@
         ],
         "summary": "01. Get All",
         "description": "Sortable by: createdAt, publishedAt, title, status",
-        "operationId": "list_14",
+        "operationId": "list_15",
         "parameters": [
           {
             "name": "status",
@@ -15577,7 +15930,7 @@
         ],
         "summary": "01. Get All",
         "description": "Newest first; sort is not accepted",
-        "operationId": "list_15",
+        "operationId": "list_16",
         "parameters": [
           {
             "name": "actorId",
@@ -15604,6 +15957,7 @@
                 "POST_UNPINNED",
                 "POST_DELETED",
                 "COMMENT_DELETED",
+                "REVIEW_DELETED",
                 "REPORT_RESOLVED",
                 "CREATED",
                 "UPDATED",
@@ -15625,6 +15979,7 @@
               "enum": [
                 "POST",
                 "COMMENT",
+                "REVIEW",
                 "REPORT",
                 "PROVINCE",
                 "DISTRICT",
@@ -17027,107 +17382,6 @@
           }
         }
       },
-      "ResolveReportCommand": {
-        "type": "object",
-        "properties": {
-          "outcome": {
-            "type": "string",
-            "description": "Final status",
-            "enum": [
-              "RESOLVED",
-              "DISMISSED"
-            ]
-          },
-          "note": {
-            "type": "string",
-            "description": "Optional note explaining the resolution",
-            "maxLength": 1000,
-            "minLength": 0
-          }
-        },
-        "required": [
-          "outcome"
-        ]
-      },
-      "ApiResponseReportResponse": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ReportResponse"
-          },
-          "path": {
-            "type": "string"
-          }
-        }
-      },
-      "ReportResponse": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19"
-          },
-          "reporterId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "reporterEmail": {
-            "type": "string",
-            "example": "reporter@example.com"
-          },
-          "targetType": {
-            "type": "string",
-            "enum": [
-              "TEACHER",
-              "REVIEW"
-            ]
-          },
-          "targetId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "reason": {
-            "type": "string",
-            "enum": [
-              "SPAM",
-              "INAPPROPRIATE_CONTENT",
-              "HARASSMENT",
-              "FRAUD",
-              "OTHER"
-            ]
-          },
-          "detail": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "PENDING",
-              "RESOLVED",
-              "DISMISSED"
-            ]
-          },
-          "resolutionNote": {
-            "type": "string"
-          },
-          "resolvedBy": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "resolvedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
       "SaveProvinceCommand": {
         "type": "object",
         "properties": {
@@ -18507,13 +18761,15 @@
             "description": "Kind of content being reported",
             "enum": [
               "TEACHER",
-              "REVIEW"
+              "REVIEW",
+              "POST",
+              "COMMENT"
             ]
           },
           "targetId": {
             "type": "string",
             "format": "uuid",
-            "description": "Id of the teacher profile or review being reported",
+            "description": "Id of the reported content: a teacher profile's account id, or a review, post, or comment id",
             "example": "0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19"
           },
           "reason": {
@@ -18539,6 +18795,198 @@
           "targetId",
           "targetType"
         ]
+      },
+      "ApiResponseReportResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ReportResponse"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "ReportResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19"
+          },
+          "reporterId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "reporterEmail": {
+            "type": "string",
+            "example": "reporter@example.com"
+          },
+          "targetType": {
+            "type": "string",
+            "enum": [
+              "TEACHER",
+              "REVIEW",
+              "POST",
+              "COMMENT"
+            ]
+          },
+          "targetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "SPAM",
+              "INAPPROPRIATE_CONTENT",
+              "HARASSMENT",
+              "FRAUD",
+              "OTHER"
+            ]
+          },
+          "detail": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RESOLVED",
+              "DISMISSED"
+            ]
+          },
+          "latestAction": {
+            "type": "string",
+            "enum": [
+              "REMOVE",
+              "BAN",
+              "WARN",
+              "DISMISS"
+            ],
+            "example": "BAN"
+          },
+          "resolvedBy": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resolvedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ApplyReportActionCommand": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "What to do about the report",
+            "enum": [
+              "REMOVE",
+              "BAN",
+              "WARN",
+              "DISMISS"
+            ],
+            "example": "BAN"
+          },
+          "banDays": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Ban length in whole days from now; BAN only",
+            "example": 7,
+            "maximum": 365,
+            "minimum": 1
+          },
+          "reason": {
+            "type": "string",
+            "description": "Shown to the responsible user and stored in the audit log; required unless DISMISS, where it's an optional internal note",
+            "example": "Spam bình luận quảng cáo",
+            "maxLength": 500,
+            "minLength": 0
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional internal details for other administrators",
+            "example": "Đã nhắc nhở 2 lần qua báo cáo.",
+            "maxLength": 2000,
+            "minLength": 0
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "ApiResponseReportDetailResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ReportDetailResponse"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "ReportActionResponse": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "REMOVE",
+              "BAN",
+              "WARN",
+              "DISMISS"
+            ],
+            "example": "BAN"
+          },
+          "banDays": {
+            "type": "integer",
+            "format": "int32",
+            "example": 7
+          },
+          "reason": {
+            "type": "string",
+            "example": "Spam bình luận quảng cáo"
+          },
+          "description": {
+            "type": "string"
+          },
+          "actorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ReportDetailResponse": {
+        "type": "object",
+        "properties": {
+          "report": {
+            "$ref": "#/components/schemas/ReportResponse"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportActionResponse"
+            }
+          }
+        }
       },
       "BulkCreateProvincesCommand": {
         "type": "object",
@@ -18715,13 +19163,14 @@
           },
           "fullName": {
             "type": "string",
+            "description": "Optional; defaults to the account's name",
             "example": "Nguyễn Văn An",
             "maxLength": 100,
             "minLength": 0
           },
           "phoneNumber": {
             "type": "string",
-            "description": "Digits only; optional",
+            "description": "Digits only; optional, defaults to the account's phone",
             "example": "0912345678",
             "pattern": "[0-9]{1,20}"
           },
@@ -18740,12 +19189,11 @@
           },
           "avatarUrl": {
             "type": "string",
-            "description": "Already-hosted avatar URL; optional",
+            "description": "Already-hosted avatar URL; optional, defaults to the account's",
             "example": "https://images.tidala.vn/avatars/student.jpg"
           }
         },
         "required": [
-          "fullName",
           "trainingLevelId"
         ]
       },
@@ -20909,7 +21357,10 @@
               "TEACHER_PROFILE_REVIEWED",
               "POST_MODERATED",
               "POST_REMOVED",
-              "COMMENT_REMOVED"
+              "COMMENT_REMOVED",
+              "REVIEW_REMOVED",
+              "MODERATION_WARNING",
+              "ACCOUNT_BANNED"
             ]
           },
           "deliveryType": {
@@ -21209,6 +21660,159 @@
           }
         }
       },
+      "AdminTeacherProfileSummary": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19"
+          },
+          "slug": {
+            "type": "string",
+            "description": "Server-derived public identifier",
+            "example": "nguyen-van-a"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "avatarUrl": {
+            "type": "string"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "coverImageObjectKey": {
+            "type": "string"
+          },
+          "experienceRange": {
+            "type": "string",
+            "enum": [
+              "LESS_THAN_1_YEAR",
+              "ONE_TO_THREE_YEARS",
+              "THREE_TO_FIVE_YEARS",
+              "FIVE_PLUS_YEARS"
+            ]
+          },
+          "studentsTrainedRange": {
+            "type": "string",
+            "enum": [
+              "LOWER_THAN_100",
+              "FROM_100",
+              "FROM_300",
+              "FROM_500",
+              "FROM_1000"
+            ]
+          },
+          "hasCurrentStudents": {
+            "type": "boolean"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "provinces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeacherProvinceDistrictSummary"
+            }
+          },
+          "trainingLevels": {
+            "type": "array",
+            "description": "Offered training levels and their teacher-specific price ranges",
+            "items": {
+              "$ref": "#/components/schemas/TeacherTrainingLevelSummary"
+            }
+          },
+          "averageRating": {
+            "type": "number",
+            "format": "double",
+            "description": "Average of all live review ratings; null when the teacher has no reviews",
+            "example": 4.7
+          },
+          "reviewCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of live reviews used to calculate averageRating",
+            "example": 38
+          },
+          "distance": {
+            "type": "string",
+            "description": "Distance from the supplied directory-search coordinates; values above 20 km are capped as >20 km",
+            "example": "3.4 km"
+          },
+          "contactEmail": {
+            "type": "string",
+            "description": "Contact email entered on the teacher profile",
+            "example": "a@example.com"
+          },
+          "contactNumber": {
+            "type": "string",
+            "description": "Contact phone number entered on the teacher profile",
+            "example": "0901234567"
+          }
+        }
+      },
+      "ApiResponsePageResponseAdminTeacherProfileSummary": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageResponseAdminTeacherProfileSummary"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "PageResponseAdminTeacherProfileSummary": {
+        "type": "object",
+        "description": "One page of results",
+        "properties": {
+          "content": {
+            "type": "array",
+            "description": "Rows on this page",
+            "items": {
+              "$ref": "#/components/schemas/AdminTeacherProfileSummary"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Zero-based page index",
+            "example": 0
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Requested page size",
+            "example": 20
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total rows across all pages",
+            "example": 34
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of pages",
+            "example": 2
+          },
+          "last": {
+            "type": "boolean",
+            "description": "Whether this is the final page",
+            "example": false
+          }
+        }
+      },
       "AdminAuditLogResponse": {
         "type": "object",
         "properties": {
@@ -21228,6 +21832,7 @@
               "POST_UNPINNED",
               "POST_DELETED",
               "COMMENT_DELETED",
+              "REVIEW_DELETED",
               "REPORT_RESOLVED",
               "CREATED",
               "UPDATED",
@@ -21242,6 +21847,7 @@
             "enum": [
               "POST",
               "COMMENT",
+              "REVIEW",
               "REPORT",
               "PROVINCE",
               "DISTRICT",

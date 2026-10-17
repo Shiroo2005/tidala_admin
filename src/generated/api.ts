@@ -95,23 +95,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/reports/{id}/resolve": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        /** 04. Resolve by Id */
-        put: operations["resolve"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/v1/provinces/{id}": {
         parameters: {
             query?: never;
@@ -743,6 +726,23 @@ export interface paths {
         put?: never;
         /** 03. Create */
         post: operations["fileReport"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/{id}/actions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 04. Apply Action by Id */
+        post: operations["applyAction"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1680,6 +1680,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/teacher-profiles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 01. List Teachers */
+        get: operations["list_14"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/posts": {
         parameters: {
             query?: never;
@@ -1691,7 +1708,7 @@ export interface paths {
          * 01. Get All
          * @description Sortable by: createdAt, publishedAt, title, status
          */
-        get: operations["list_14"];
+        get: operations["list_15"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1748,7 +1765,7 @@ export interface paths {
          * 01. Get All
          * @description Newest first; sort is not accepted
          */
-        get: operations["list_15"];
+        get: operations["list_16"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2314,47 +2331,6 @@ export interface components {
              * @description Equal to createdAt until the review is edited
              */
             updatedAt?: string;
-        };
-        ResolveReportCommand: {
-            /**
-             * @description Final status
-             * @enum {string}
-             */
-            outcome: "RESOLVED" | "DISMISSED";
-            /** @description Optional note explaining the resolution */
-            note?: string;
-        };
-        ApiResponseReportResponse: {
-            message?: string;
-            data?: components["schemas"]["ReportResponse"];
-            path?: string;
-        };
-        ReportResponse: {
-            /**
-             * Format: uuid
-             * @example 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19
-             */
-            id?: string;
-            /** Format: uuid */
-            reporterId?: string;
-            /** @example reporter@example.com */
-            reporterEmail?: string;
-            /** @enum {string} */
-            targetType?: "TEACHER" | "REVIEW";
-            /** Format: uuid */
-            targetId?: string;
-            /** @enum {string} */
-            reason?: "SPAM" | "INAPPROPRIATE_CONTENT" | "HARASSMENT" | "FRAUD" | "OTHER";
-            detail?: string;
-            /** @enum {string} */
-            status?: "PENDING" | "RESOLVED" | "DISMISSED";
-            resolutionNote?: string;
-            /** Format: uuid */
-            resolvedBy?: string;
-            /** Format: date-time */
-            resolvedAt?: string;
-            /** Format: date-time */
-            createdAt?: string;
         };
         SaveProvinceCommand: {
             /**
@@ -3007,10 +2983,10 @@ export interface components {
              * @description Kind of content being reported
              * @enum {string}
              */
-            targetType: "TEACHER" | "REVIEW";
+            targetType: "TEACHER" | "REVIEW" | "POST" | "COMMENT";
             /**
              * Format: uuid
-             * @description Id of the teacher profile or review being reported
+             * @description Id of the reported content: a teacher profile's account id, or a review, post, or comment id
              * @example 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19
              */
             targetId: string;
@@ -3021,6 +2997,94 @@ export interface components {
             reason: "SPAM" | "INAPPROPRIATE_CONTENT" | "HARASSMENT" | "FRAUD" | "OTHER";
             /** @description Optional free-text detail, e.g. required context for OTHER */
             detail?: string;
+        };
+        ApiResponseReportResponse: {
+            message?: string;
+            data?: components["schemas"]["ReportResponse"];
+            path?: string;
+        };
+        ReportResponse: {
+            /**
+             * Format: uuid
+             * @example 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19
+             */
+            id?: string;
+            /** Format: uuid */
+            reporterId?: string;
+            /** @example reporter@example.com */
+            reporterEmail?: string;
+            /** @enum {string} */
+            targetType?: "TEACHER" | "REVIEW" | "POST" | "COMMENT";
+            /** Format: uuid */
+            targetId?: string;
+            /** @enum {string} */
+            reason?: "SPAM" | "INAPPROPRIATE_CONTENT" | "HARASSMENT" | "FRAUD" | "OTHER";
+            detail?: string;
+            /** @enum {string} */
+            status?: "PENDING" | "RESOLVED" | "DISMISSED";
+            /**
+             * @example BAN
+             * @enum {string}
+             */
+            latestAction?: "REMOVE" | "BAN" | "WARN" | "DISMISS";
+            /** Format: uuid */
+            resolvedBy?: string;
+            /** Format: date-time */
+            resolvedAt?: string;
+            /** Format: date-time */
+            createdAt?: string;
+        };
+        ApplyReportActionCommand: {
+            /**
+             * @description What to do about the report
+             * @example BAN
+             * @enum {string}
+             */
+            action: "REMOVE" | "BAN" | "WARN" | "DISMISS";
+            /**
+             * Format: int32
+             * @description Ban length in whole days from now; BAN only
+             * @example 7
+             */
+            banDays?: number;
+            /**
+             * @description Shown to the responsible user and stored in the audit log; required unless DISMISS, where it's an optional internal note
+             * @example Spam bình luận quảng cáo
+             */
+            reason?: string;
+            /**
+             * @description Optional internal details for other administrators
+             * @example Đã nhắc nhở 2 lần qua báo cáo.
+             */
+            description?: string;
+        };
+        ApiResponseReportDetailResponse: {
+            message?: string;
+            data?: components["schemas"]["ReportDetailResponse"];
+            path?: string;
+        };
+        ReportActionResponse: {
+            /**
+             * @example BAN
+             * @enum {string}
+             */
+            action?: "REMOVE" | "BAN" | "WARN" | "DISMISS";
+            /**
+             * Format: int32
+             * @example 7
+             */
+            banDays?: number;
+            /** @example Spam bình luận quảng cáo */
+            reason?: string;
+            description?: string;
+            /** Format: uuid */
+            actorId?: string;
+            /** Format: date-time */
+            createdAt?: string;
+        };
+        ReportDetailResponse: {
+            report?: components["schemas"]["ReportResponse"];
+            actions?: components["schemas"]["ReportActionResponse"][];
         };
         BulkCreateProvincesCommand: {
             /** @description Provinces to create, each with its own districts */
@@ -3087,10 +3151,13 @@ export interface components {
              * @example 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19
              */
             trainingLevelId: string;
-            /** @example Nguyễn Văn An */
-            fullName: string;
             /**
-             * @description Digits only; optional
+             * @description Optional; defaults to the account's name
+             * @example Nguyễn Văn An
+             */
+            fullName?: string;
+            /**
+             * @description Digits only; optional, defaults to the account's phone
              * @example 0912345678
              */
             phoneNumber?: string;
@@ -3103,7 +3170,7 @@ export interface components {
             /** @example Học buổi tối */
             note?: string;
             /**
-             * @description Already-hosted avatar URL; optional
+             * @description Already-hosted avatar URL; optional, defaults to the account's
              * @example https://images.tidala.vn/avatars/student.jpg
              */
             avatarUrl?: string;
@@ -4384,7 +4451,7 @@ export interface components {
             /** Format: uuid */
             actorId?: string;
             /** @enum {string} */
-            kind?: "POST_COMMENTED" | "COMMENT_REPLIED" | "POST_LIKED" | "TEACHER_PROFILE_REVIEWED" | "POST_MODERATED" | "POST_REMOVED" | "COMMENT_REMOVED";
+            kind?: "POST_COMMENTED" | "COMMENT_REPLIED" | "POST_LIKED" | "TEACHER_PROFILE_REVIEWED" | "POST_MODERATED" | "POST_REMOVED" | "COMMENT_REMOVED" | "REVIEW_REMOVED" | "MODERATION_WARNING" | "ACCOUNT_BANNED";
             /** @enum {string} */
             deliveryType?: "INSTANT" | "DIGEST";
             data?: {
@@ -4582,15 +4649,109 @@ export interface components {
              */
             last?: boolean;
         };
+        AdminTeacherProfileSummary: {
+            /**
+             * Format: uuid
+             * @example 0198d1f5-1b44-7e08-9d21-7c6a5e2f4b19
+             */
+            userId?: string;
+            /**
+             * @description Server-derived public identifier
+             * @example nguyen-van-a
+             */
+            slug?: string;
+            fullName?: string;
+            avatarUrl?: string;
+            bio?: string;
+            coverImageObjectKey?: string;
+            /** @enum {string} */
+            experienceRange?: "LESS_THAN_1_YEAR" | "ONE_TO_THREE_YEARS" | "THREE_TO_FIVE_YEARS" | "FIVE_PLUS_YEARS";
+            /** @enum {string} */
+            studentsTrainedRange?: "LOWER_THAN_100" | "FROM_100" | "FROM_300" | "FROM_500" | "FROM_1000";
+            hasCurrentStudents?: boolean;
+            /** Format: double */
+            lng?: number;
+            /** Format: double */
+            lat?: number;
+            provinces?: components["schemas"]["TeacherProvinceDistrictSummary"][];
+            /** @description Offered training levels and their teacher-specific price ranges */
+            trainingLevels?: components["schemas"]["TeacherTrainingLevelSummary"][];
+            /**
+             * Format: double
+             * @description Average of all live review ratings; null when the teacher has no reviews
+             * @example 4.7
+             */
+            averageRating?: number;
+            /**
+             * Format: int64
+             * @description Number of live reviews used to calculate averageRating
+             * @example 38
+             */
+            reviewCount?: number;
+            /**
+             * @description Distance from the supplied directory-search coordinates; values above 20 km are capped as >20 km
+             * @example 3.4 km
+             */
+            distance?: string;
+            /**
+             * @description Contact email entered on the teacher profile
+             * @example a@example.com
+             */
+            contactEmail?: string;
+            /**
+             * @description Contact phone number entered on the teacher profile
+             * @example 0901234567
+             */
+            contactNumber?: string;
+        };
+        ApiResponsePageResponseAdminTeacherProfileSummary: {
+            message?: string;
+            data?: components["schemas"]["PageResponseAdminTeacherProfileSummary"];
+            path?: string;
+        };
+        /** @description One page of results */
+        PageResponseAdminTeacherProfileSummary: {
+            /** @description Rows on this page */
+            content?: components["schemas"]["AdminTeacherProfileSummary"][];
+            /**
+             * Format: int32
+             * @description Zero-based page index
+             * @example 0
+             */
+            page?: number;
+            /**
+             * Format: int32
+             * @description Requested page size
+             * @example 20
+             */
+            size?: number;
+            /**
+             * Format: int64
+             * @description Total rows across all pages
+             * @example 34
+             */
+            totalElements?: number;
+            /**
+             * Format: int32
+             * @description Total number of pages
+             * @example 2
+             */
+            totalPages?: number;
+            /**
+             * @description Whether this is the final page
+             * @example false
+             */
+            last?: boolean;
+        };
         AdminAuditLogResponse: {
             /** Format: uuid */
             id?: string;
             /** Format: uuid */
             actorId?: string;
             /** @enum {string} */
-            action?: "POST_STATUS_CHANGED" | "POST_PINNED" | "POST_UNPINNED" | "POST_DELETED" | "COMMENT_DELETED" | "REPORT_RESOLVED" | "CREATED" | "UPDATED" | "DELETED" | "BULK_CREATED" | "USER_BANNED" | "USER_UNBANNED";
+            action?: "POST_STATUS_CHANGED" | "POST_PINNED" | "POST_UNPINNED" | "POST_DELETED" | "COMMENT_DELETED" | "REVIEW_DELETED" | "REPORT_RESOLVED" | "CREATED" | "UPDATED" | "DELETED" | "BULK_CREATED" | "USER_BANNED" | "USER_UNBANNED";
             /** @enum {string} */
-            targetType?: "POST" | "COMMENT" | "REPORT" | "PROVINCE" | "DISTRICT" | "TRAINING_LEVEL" | "TAG" | "USER";
+            targetType?: "POST" | "COMMENT" | "REVIEW" | "REPORT" | "PROVINCE" | "DISTRICT" | "TRAINING_LEVEL" | "TAG" | "USER";
             /** Format: uuid */
             targetId?: string;
             reason?: string;
@@ -5200,77 +5361,6 @@ export interface operations {
             };
             /** @description No live review with this id belongs to the caller */
             404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    resolve: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ResolveReportCommand"];
-            };
-        };
-        responses: {
-            /** @description Report resolved */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiResponseReportResponse"];
-                };
-            };
-            /** @description Validation failed, or the request body is not valid JSON */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description No, expired, or invalid bearer access token */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Authenticated but not an ADMIN */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description No report with this id */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description The report is no longer PENDING */
-            409: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -8455,7 +8545,7 @@ export interface operations {
         parameters: {
             query: {
                 status?: "PENDING" | "RESOLVED" | "DISMISSED";
-                targetType?: "TEACHER" | "REVIEW";
+                targetType?: "TEACHER" | "REVIEW" | "POST" | "COMMENT";
                 pageable: components["schemas"]["Pageable"];
             };
             header?: never;
@@ -8542,7 +8632,7 @@ export interface operations {
                     "*/*": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description No teacher profile/review exists with the given targetId */
+            /** @description No live teacher profile/review/comment, or no published post, exists with the given targetId */
             404: {
                 headers: {
                     [name: string]: unknown;
@@ -8552,6 +8642,77 @@ export interface operations {
                 };
             };
             /** @description The caller already has a pending report on this same target */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    applyAction: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ApplyReportActionCommand"];
+            };
+        };
+        responses: {
+            /** @description Action applied; the report with its history */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiResponseReportDetailResponse"];
+                };
+            };
+            /** @description Validation failed, the request body is not valid JSON, or the action doesn't apply to the report's target type */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No, expired, or invalid bearer access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Authenticated but not an ADMIN */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No report with this id, the item to REMOVE no longer exists, or BAN/WARN has no live account to land on */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description The report was dismissed, DISMISS was sent for a report that already had an action, or BAN targets an administrator account */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -11020,13 +11181,13 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description The report */
+            /** @description The report with its action history */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": components["schemas"]["ApiResponseReportResponse"];
+                    "*/*": components["schemas"]["ApiResponseReportDetailResponse"];
                 };
             };
             /** @description No, expired, or invalid bearer access token */
@@ -11647,6 +11808,64 @@ export interface operations {
     };
     list_14: {
         parameters: {
+            query: {
+                provinceSlug?: string;
+                districtSlugs?: string[];
+                trainingLevelSlugs?: string[];
+                tagSlugs?: string[];
+                q?: string;
+                sort?: "EXPERIENCE_YEAR" | "PRICE_LOW_TO_MAX" | "PRICE_MAX_TO_LOW";
+                lat?: number;
+                lng?: number;
+                limitDistance?: number;
+                pageable: components["schemas"]["Pageable"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A page of teachers with contact details */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponsePageResponseAdminTeacherProfileSummary"];
+                };
+            };
+            /** @description districtSlugs was given without provinceSlug, a price sort was given without trainingLevelSlugs, coordinates were incomplete/invalid, limitDistance was invalid or lacked coordinates, or sort has an invalid enum value */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description No or invalid bearer token: AUTHENTICATION_REQUIRED */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Caller is not an ADMIN: ACCESS_DENIED */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    list_15: {
+        parameters: {
             query?: {
                 status?: "DRAFT" | "PUBLISHED" | "REJECTED";
                 /** @description Zero-based page index (0..N) */
@@ -11807,15 +12026,15 @@ export interface operations {
             };
         };
     };
-    list_15: {
+    list_16: {
         parameters: {
             query?: {
                 /** @description Only entries by this administrator */
                 actorId?: string;
                 /** @description Only this action */
-                action?: "POST_STATUS_CHANGED" | "POST_PINNED" | "POST_UNPINNED" | "POST_DELETED" | "COMMENT_DELETED" | "REPORT_RESOLVED" | "CREATED" | "UPDATED" | "DELETED" | "BULK_CREATED" | "USER_BANNED" | "USER_UNBANNED";
+                action?: "POST_STATUS_CHANGED" | "POST_PINNED" | "POST_UNPINNED" | "POST_DELETED" | "COMMENT_DELETED" | "REVIEW_DELETED" | "REPORT_RESOLVED" | "CREATED" | "UPDATED" | "DELETED" | "BULK_CREATED" | "USER_BANNED" | "USER_UNBANNED";
                 /** @description Only this kind of target */
-                targetType?: "POST" | "COMMENT" | "REPORT" | "PROVINCE" | "DISTRICT" | "TRAINING_LEVEL" | "TAG" | "USER";
+                targetType?: "POST" | "COMMENT" | "REVIEW" | "REPORT" | "PROVINCE" | "DISTRICT" | "TRAINING_LEVEL" | "TAG" | "USER";
                 /** @description Only entries about this record */
                 targetId?: string;
                 /**
