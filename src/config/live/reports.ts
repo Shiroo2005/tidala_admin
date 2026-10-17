@@ -11,7 +11,8 @@ type ReportDetail = components["schemas"]["ReportDetailResponse"];
 type ReportAction = components["schemas"]["ReportActionResponse"];
 type ApplyAction = components["schemas"]["ApplyReportActionCommand"];
 type History = ReportDetailData["history"][number];
-type Review = components["schemas"]["ReviewSummary"];
+type ReviewDetail = components["schemas"]["ReviewDetailResponse"];
+type AdminUser = { fullName?: string; email?: string | null; phoneNumber?: string | null };
 
 // The backend has five reason codes; the screens have their own per-type lists. Closest match per type.
 const REASON: Record<string, Record<string, string>> = {
@@ -61,23 +62,31 @@ const toHistory = (reportId: string, action: ReportAction, index: number, users:
 
 const shortId = (id?: string) => (id ? id.slice(0, 8) : "");
 
-async function loadTarget(report: Report, teachers: Map<string, { fullName?: string; avatarUrl: string }>): Promise<ReportTarget | null> {
+async function loadTarget(report: Report, teachers: Map<string, { fullName?: string; avatarUrl: string }>, users: Map<string, AdminUser>): Promise<ReportTarget | null> {
   const id = report.targetId!;
   if (report.targetType === "TEACHER") {
     const teacher = teachers.get(id);
     return { type: "TEACHER", id, fullName: teacher?.fullName ?? `Giáo viên ${shortId(id)}`, avatarUrl: teacher?.avatarUrl || null };
   }
-  const review = await realRequest<Review>({ method: "get", url: `/api/v1/reviews/${id}` }).catch(() => null);
+  const detail = await realRequest<ReviewDetail>({ method: "get", url: `/api/v1/reviews/${id}` }).catch(() => null);
+  const review = detail?.review;
   if (!review) return { type: "REVIEW", id, content: "(Đánh giá đã bị xóa)", rating: 0 };
-  const teacherName = teachers.get(review.teacherUserId!)?.fullName ?? "";
+  const student = users.get(review.studentUserId!);
+  const teacherName = detail.teacherFullName ?? teachers.get(review.teacherUserId!)?.fullName ?? "";
   return {
     type: "REVIEW",
     id,
     content: review.comment ?? "",
     rating: review.rating ?? 0,
-    author: { id: review.studentUserId!, fullName: review.studentFullName ?? "", avatarUrl: media(review.studentAvatarUrl) },
-    teacher: { id: review.teacherUserId!, fullName: teacherName },
-    authorName: review.studentFullName,
+    author: {
+      id: review.studentUserId!,
+      fullName: review.studentFullName ?? student?.fullName ?? "",
+      avatarUrl: media(review.studentAvatarUrl),
+      email: student?.email ?? undefined,
+      phoneNumber: student?.phoneNumber ?? undefined,
+    },
+    teacher: { id: review.teacherUserId!, fullName: teacherName, avatarUrl: media(detail.teacherAvatarUrl) },
+    authorName: review.studentFullName ?? student?.fullName,
     teacherName,
   };
 }
@@ -99,7 +108,7 @@ async function uiReports(reports: Report[], actions: ReportAction[] = []): Promi
         reporterAvatarUrl: media(reporter?.avatarUrl),
         targetType: report.targetType!,
         targetId: report.targetId,
-        target: await loadTarget(report, teachers),
+        target: await loadTarget(report, teachers, users),
         reason: REASON[report.targetType!]?.[report.reason!] ?? "other",
         description: report.detail ?? null,
         status,
