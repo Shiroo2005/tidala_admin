@@ -8,7 +8,8 @@ interface ReportTabsProps {
 const TABS: { key: ReportTabType; label: string }[] = [
   { key: "teacher", label: "Báo cáo giáo viên" },
   { key: "review", label: "Báo cáo đánh giá" },
-  { key: "post", label: "Báo cáo bài viết" },
+  // Hidden: the backend only has teacher and review reports for now.
+  // { key: "post", label: "Báo cáo bài viết" },
 ];
 
 export const ReportTabs = ({ activeTab, onTabChange }: ReportTabsProps) => {
