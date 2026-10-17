@@ -30,6 +30,16 @@ export const TrainingLevelList = ({
         ),
       },
       {
+        accessorKey: "slug",
+        header: "Slug",
+        enableSorting: false,
+        cell: ({ getValue }) => (
+          <span className="font-mono text-xs text-app-text-muted">
+            {(getValue() as string) || "—"}
+          </span>
+        ),
+      },
+      {
         accessorKey: "description",
         header: "Mô tả",
         enableSorting: false,

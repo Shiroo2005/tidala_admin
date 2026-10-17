@@ -36,6 +36,16 @@ export const TagList = ({ tags, isLoading, onEdit, onDelete }: Props) => {
         ),
       },
       {
+        accessorKey: "slug",
+        header: "Slug",
+        enableSorting: false,
+        cell: ({ getValue }) => (
+          <span className="font-mono text-xs text-app-text-muted">
+            {(getValue() as string) || "—"}
+          </span>
+        ),
+      },
+      {
         accessorKey: "type",
         header: "Loại",
         enableSorting: false,

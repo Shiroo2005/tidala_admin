@@ -36,6 +36,7 @@ export interface UserSuspensionResponse {
 export interface TrainingLevel {
   id: string;
   name: string;
+  slug?: string;
   description: string;
 }
 
